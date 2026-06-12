@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suryansh Sharma | Machine Learning Engineer & Technical Growth Hacker</title>
+  <meta name="description"
+    content="Portfolio of Suryansh Sharma, bridging the gap between machine learning engineering and technical growth automation.">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Prevent FOUC: Load theme state before paint -->
+  <script>
+    (function () {
+      const storedTheme = localStorage.getItem('theme');
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      const activeTheme = storedTheme || systemTheme;
+      document.documentElement.dataset.theme = activeTheme;
+
+      // Update HTML color-scheme meta
+      document.addEventListener('DOMContentLoaded', () => {
+        const meta = document.querySelector('meta[name="color-scheme"]');
+        if (meta) {
+          meta.content = activeTheme === 'dark' ? 'dark' : 'light';
+        }
+      });
+    })();
+  </script>
+</head>
+
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="glow-orb orb-1" aria-hidden="true"></div>
+  <div class="glow-orb orb-2" aria-hidden="true"></div>
+  <div class="glow-orb orb-3" aria-hidden="true"></div>
+
+  <!-- Header Navigation -->
+  <header class="header" id="main-header">
+    <div class="nav-container">
+      <a href="#" class="logo" aria-label="Suryansh Sharma Home">
+        <span class="logo-accent">&lt;</span>Suryansh<span class="logo-accent"> /&gt;</span>
+      </a>
+
+      <nav class="nav-links" id="nav-menu" aria-label="Main Navigation">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#terminal" class="nav-link">Terminal</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#leadership" class="nav-link">Leadership</a>
+        <a href="#contact" class="nav-link btn-contact-nav">Contact</a>
+      </nav>
+
+      <div class="nav-controls">
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle light and dark theme">
+          <!-- Light Icon -->
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41">
+            </path>
+          </svg>
+          <!-- Dark Icon -->
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+        </button>
+
+        <button id="mobile-menu-toggle" class="mobile-toggle" aria-expanded="false" aria-controls="nav-menu"
+          aria-label="Open main menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-content">
+        <div class="badge-container scroll-fade">
+          <span class="pulse-dot"></span>
+          <span class="hero-badge">Available for building something that has a impact</span>
+        </div>
+        <h1 class="hero-title scroll-fade">
+          Machine Learning Developer & <span class="gradient-text">Technical Growth Hacker</span>
+        </h1>
+        <p class="hero-subtitle scroll-fade">
+          Bridging the gap between complex AI engineering and real-world business growth.
+        </p>
+
+        <div class="hero-actions scroll-fade">
+          <a href="#projects" class="btn btn-primary">
+            <span>Explore My Work</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <a href="#terminal" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+            <span>Launch Terminal</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-scroll-indicator" aria-hidden="true">
+        <a href="#about" aria-label="Scroll to about section">
+          <div class="mouse">
+            <div class="wheel"></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="section-container">
+        <h2 class="section-title scroll-reveal">About Me</h2>
+        <div class="about-grid">
+          <div class="about-text scroll-reveal">
+            <p>
+              A versatile and execution-focused Computer Science student who bridges the gap between complex AI
+              engineering and real-world business growth. Proven track record of architecting advanced deep learning
+              pipelines while building AI-driven web applications that drive user engagement and lead generation.
+            </p>
+            <p>
+              Deeply interested in leveraging machine learning and automation to solve technical bottlenecks and scale
+              digital products. A fast learner and collaborative problem-solver eager to bring a blend of engineering
+              rigor and growth-minded adaptability to a fast-paced startup team.
+            </p>
+            <div class="quick-stats">
+              <div class="stat-card">
+                <span class="stat-number">97.9%</span>
+                <span class="stat-label">Model Accuracy (XAI)</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number">21+</span>
+                <span class="stat-label">Financial Indicators Built</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-number">Multi-Agent</span>
+                <span class="stat-label">Reddit Lead Scorers</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-cards scroll-reveal">
+            <div class="highlight-card">
+              <div class="card-icon" aria-hidden="true">🧠</div>
+              <h3>Deep Learning & Computer Vision</h3>
+              <p>Developing advanced networks using hybrid architectures (ResNet + Vision Transformers) with
+                Explainability built-in (LIME, Grad-CAM).</p>
+            </div>
+            <div class="highlight-card">
+              <div class="card-icon" aria-hidden="true">📈</div>
+              <h3>Sequential Forecasting</h3>
+              <p>Designing time-series prediction systems utilizing zero-leakage chronology validation to prevent data
+                contamination in LSTM/GRU comparisons.</p>
+            </div>
+            <div class="highlight-card">
+              <div class="card-icon" aria-hidden="true">🤖</div>
+              <h3>Agentic Automations</h3>
+              <p>Orchestrating autonomous multi-agent pipelines for internet scraping, intent extraction, customized
+                copy writing, and lead scoring.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-section" id="experience">
+      <div class="section-container">
+        <h2 class="section-title scroll-reveal">Work Experience</h2>
+        <p class="section-subtitle scroll-reveal">A timeline of my professional roles delivering production-grade
+          software and automation pipelines.</p>
+
+        <div class="experience-timeline-container">
+          <!-- Experience Item 1 -->
+          <div class="experience-card-item scroll-reveal">
+            <div class="exp-card-header">
+              <div class="exp-role-info">
+                <h3>Full-Stack AI & Automation Developer</h3>
+                <span class="exp-company">Self-Employed (Part-Time)</span>
+              </div>
+              <div class="exp-meta-info text-right">
+                <span class="exp-date">2022 - 2026</span>
+                <span class="exp-location">Remote</span>
+              </div>
+            </div>
+            <ul class="exp-bullets">
+              <li>Architected and deployed 5+ full-stack web applications for small- to medium-sized enterprises,
+                integrating OpenAI and NLP-based conversational agents (via Dialogflow) to automate user intent
+                recognition and streamline transactional booking workflows.</li>
+              <li>Engineered programmatic generative AI pipelines using Large Language Model (LLM) APIs to automate
+                high-volume SEO optimisation workflows, directly accelerating client conversion rates and boosting
+                inbound lead generation by 25%.</li>
+              <li>Designed automated API scheduling infrastructure and data-driven delivery workflows, reducing system
+                response times by 40% and optimising user touchpoints to drive a measurable 40% increase in engagement
+                metrics.</li>
+            </ul>
+          </div>
+
+          <!-- Terminal Section -->
+          <section class="terminal-section" id="terminal">
+            <div class="section-container">
+              <div class="terminal-header-area">
+                <h2 class="section-title scroll-reveal">Interactive Terminal CLI</h2>
+                <p class="section-subtitle scroll-reveal">Query my experience directly via standard shell commands or
+                  select a
+                  quick shortcut.</p>
+              </div>
+
+              <div class="terminal-container scroll-reveal">
+                <div class="terminal-bar">
+                  <div class="terminal-dots">
+                    <span class="dot close"></span>
+                    <span class="dot minimize"></span>
+                    <span class="dot expand"></span>
+                  </div>
+                  <div class="terminal-title">suryansh@developer-node:~</div>
+                  <div class="terminal-status">Online</div>
+                </div>
+
+                <div class="terminal-window" id="terminal-body">
+                  <div class="terminal-output">
+                    <p class="text-dim">Suryansh Sharma Developer Node OS v1.0.0 (x86_64-apple-darwin)</p>
+                    <p class="text-dim">Type <span class="cmd-text">help</span> to view all available commands or choose
+                      a
+                      query below.</p>
+                    <p>&nbsp;</p>
+                    <div id="terminal-history"></div>
+                  </div>
+                  <div class="terminal-prompt-line">
+                    <span class="prompt-symbol">suryansh@juit:~$</span>
+                    <input type="text" id="terminal-input" autocomplete="off" spellcheck="false"
+                      aria-label="Terminal input line" placeholder="...">
+                  </div>
+                </div>
+
+                <div class="terminal-shortcuts">
+                  <button class="terminal-btn-cmd" data-cmd="about">about</button>
+                  <button class="terminal-btn-cmd" data-cmd="projects">projects</button>
+                  <button class="terminal-btn-cmd" data-cmd="skills">skills</button>
+                  <button class="terminal-btn-cmd" data-cmd="football">football</button>
+                  <button class="terminal-btn-cmd" data-cmd="clear">clear</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Projects Grid Section -->
+          <section class="projects-section" id="projects">
+            <div class="section-container">
+              <h2 class="section-title scroll-reveal">Core Project Portfolios</h2>
+              <p class="section-subtitle scroll-reveal">Explore a curated selection of systems spanning computer vision,
+                quantitative modeling, autonomous agents, and SaaS utility dashboards.</p>
+
+              <div class="projects-grid">
+                <!-- Project 1: Crop Disease -->
+                <article class="project-card scroll-reveal" id="proj-card-crop">
+                  <div class="project-visual bg-grad-crop">
+                    <div class="leaf-heatmap-preview">
+                      <span class="heatmap-overlay-text">Grad-CAM Overlay Enabled</span>
+                      <div class="pulse-overlay-ring"></div>
+                    </div>
+                  </div>
+                  <div class="project-info">
+                    <div class="project-tags">
+                      <span class="tag">ResNet-50</span>
+                      <span class="tag">Vision Transformer</span>
+                      <span class="tag">XAI</span>
+                    </div>
+                    <h3 class="project-name">Explainable Crop Disease Detection System</h3>
+                    <p class="project-description">
+                      Engineered hybrid deep learning Vision Transformer (ViT) paired with a ResNet-50 backbone,
+                      capturing
+                      long-range pathological symptoms with post-hoc explanation (Grad-CAM, LIME) and Bayesian
+                      Uncertainty
+                      Tier.
+                    </p>
+                    <div class="project-stats-row">
+                      <div class="p-stat"><strong>97.91%</strong> Validation Accuracy</div>
+                      <div class="p-stat"><strong>0.99</strong> ROC-AUC Score</div>
+                    </div>
+                    <div class="project-links">
+                      <button class="btn btn-sm btn-outline btn-dialog-trigger" data-dialog="dialog-crop">Deep Dive &
+                        Demo</button>
+                      <a href="https://github.com/suryanshxharma/crop-disease-detection" target="_blank"
+                        class="github-icon-link" aria-label="View source code on GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path
+                            d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
+                          </path>
+                          <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Project 2: Stock Forecasting -->
+                <article class="project-card scroll-reveal" id="proj-card-stock">
+                  <div class="project-visual bg-grad-stock">
+                    <div class="stock-graph-preview">
+                      <svg viewBox="0 0 100 50" class="graph-svg-line">
+                        <path d="M 0 40 L 10 38 L 20 42 L 30 30 L 40 32 L 50 20 L 60 25 L 70 15 L 80 18 L 90 8 L 100 10"
+                          fill="none" stroke="var(--color-primary)" stroke-width="1.5"></path>
+                        <path d="M 0 40 L 10 37 L 20 40 L 30 31 L 40 33 L 50 18 L 60 23 L 70 14 L 80 20 L 90 7 L 100 8"
+                          fill="none" stroke="var(--color-secondary)" stroke-width="1.5" stroke-dasharray="2,2"></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="project-info">
+                    <div class="project-tags">
+                      <span class="tag">TensorFlow</span>
+                      <span class="tag">GRU/LSTM</span>
+                      <span class="tag">FastAPI</span>
+                    </div>
+                    <h3 class="project-name">Stock Price Prediction</h3>
+                    <p class="project-description">
+                      Architected an end-to-end stock forecasting pipeline using TensorFlow, scikit-learn, and yfinance
+                      to
+                      compare sequential models (LSTM, GRU) against traditional baselines.
+                    </p>
+                    <div class="project-stats-row">
+                      <div class="p-stat"><strong>21</strong> Technical Indicators</div>
+                      <div class="p-stat"><strong>Zero</strong> Forward Leakage</div>
+                    </div>
+                    <div class="project-links">
+                      <button class="btn btn-sm btn-outline btn-dialog-trigger" data-dialog="dialog-stock">Deep Dive &
+                        Demo</button>
+                      <a href="https://github.com/suryanshxharma/stock-prediction-pipeline" target="_blank"
+                        class="github-icon-link" aria-label="View source code on GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path
+                            d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
+                          </path>
+                          <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Project 3: Typewise AI Growth Agent -->
+                <article class="project-card scroll-reveal" id="proj-card-agent">
+                  <div class="project-visual bg-grad-agent">
+                    <div class="terminal-nodes-preview">
+                      <div class="node active">Lead Crawler</div>
+                      <div class="node-arrow">&rarr;</div>
+                      <div class="node">Intent Classifier</div>
+                      <div class="node-arrow">&rarr;</div>
+                      <div class="node">Response Synthesizer</div>
+                    </div>
+                  </div>
+                  <div class="project-info">
+                    <div class="project-tags">
+                      <span class="tag">LLM Orchestration</span>
+                      <span class="tag">Lead Scoring</span>
+                      <span class="tag">Scrapy</span>
+                    </div>
+                    <h3 class="project-name">Typewise AI Growth Agent</h3>
+                    <p class="project-description">
+                      An autonomous B2B lead generation engine crawling social platforms (Reddit) to score intention,
+                      outline
+                      user pain points, and write custom sales copies.
+                    </p>
+                    <div class="project-stats-row">
+                      <div class="p-stat"><strong>Multi-Agent</strong> Pipeline</div>
+                      <div class="p-stat"><strong>Qual+Quant</strong> Lead Scoring</div>
+                    </div>
+                    <div class="project-links">
+                      <button class="btn btn-sm btn-outline btn-dialog-trigger" data-dialog="dialog-agent">Deep Dive &
+                        Demo</button>
+                      <a href="https://github.com/suryanshxharma/AI-Growth-Agent-for-B2B-SaaS" target="_blank"
+                        class="github-icon-link" aria-label="View source code on GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path
+                            d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
+                          </path>
+                          <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Project 4: BillFlow WA -->
+                <article class="project-card scroll-reveal" id="proj-card-billflow">
+                  <div class="project-visual bg-grad-receipt">
+                    <div class="billing-receipt-preview">
+                      <div class="receipt-paper">
+                        <div class="receipt-header">BillFlow WA</div>
+                        <div class="receipt-divider">- - - - - - -</div>
+                        <div class="receipt-item">Total: <span>₹749.00</span></div>
+                        <div class="receipt-divider">- - - - - - -</div>
+                        <div class="receipt-footer">SCAN TO PAY</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="project-info">
+                    <div class="project-tags">
+                      <span class="tag">WhatsApp API</span>
+                      <span class="tag">UPI Redirection</span>
+                      <span class="tag">Web Audio API</span>
+                    </div>
+                    <h3 class="project-name">BillFlow WA: WhatsApp Billing SaaS</h3>
+                    <p class="project-description">
+                      A receipt billing dashboard for SMBs sending dynamic receipts and UPI pay gates through
+                      redirection
+                      hooks, saving 100% API expenses.
+                    </p>
+                    <div class="project-stats-row">
+                      <div class="p-stat"><strong>₹0.00</strong> API Billing Costs</div>
+                      <div class="p-stat"><strong>Web Audio</strong> Chime Synths</div>
+                    </div>
+                    <div class="project-links">
+                      <button class="btn btn-sm btn-outline btn-dialog-trigger" data-dialog="dialog-billflow">Deep Dive
+                        &
+                        Demo</button>
+                      <a href="https://github.com/suryanshxharma/BillFlow-WA" target="_blank" class="github-icon-link"
+                        aria-label="View source code on GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path
+                            d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
+                          </path>
+                          <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <!-- Skills Section -->
+          <section class="skills-section" id="skills">
+            <div class="section-container">
+              <h2 class="section-title scroll-reveal">Technical Capabilities</h2>
+              <p class="section-subtitle scroll-reveal">A comprehensive mapping of my tools, languages, and technical
+                frameworks.</p>
+
+              <div class="skills-grid">
+                <!-- Category 1 -->
+                <div class="skill-category scroll-reveal">
+                  <h3>Languages</h3>
+                  <div class="skill-items">
+                    <div class="skill-item" data-level="95">
+                      <div class="skill-meta">
+                        <span class="skill-name">Python</span>
+                        <span class="skill-percentage">95%</span>
+                      </div>
+                      <div class="skill-progress-bar">
+                        <div class="skill-progress" style="width: 95%;"></div>
+                      </div>
+                    </div>
+                    <div class="skill-item" data-level="85">
+                      <div class="skill-meta">
+                        <span class="skill-name">C++</span>
+                        <span class="skill-percentage">85%</span>
+                      </div>
+                      <div class="skill-progress-bar">
+                        <div class="skill-progress" style="width: 85%;"></div>
+                      </div>
+                    </div>
+                    <div class="skill-item" data-level="75">
+                      <div class="skill-meta">
+                        <span class="skill-name">JAVA & MATLAB</span>
+                        <span class="skill-percentage">75%</span>
+                      </div>
+                      <div class="skill-progress-bar">
+                        <div class="skill-progress" style="width: 75%;"></div>
+                      </div>
+                    </div>
+                    <div class="skill-item" data-level="80">
+                      <div class="skill-meta">
+                        <span class="skill-name">HTML & CSS</span>
+                        <span class="skill-percentage">80%</span>
+                      </div>
+                      <div class="skill-progress-bar">
+                        <div class="skill-progress" style="width: 80%;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Category 2 -->
+                <div class="skill-category scroll-reveal">
+                  <h3>AI/ML Libraries</h3>
+                  <div class="skill-items">
+                    <div class="skill-item" data-level="90">
+                      <div class="skill-meta">
+                        <span class="skill-name">PyTorch & TensorFlow</span>
+                        <span class="skill-percentage">90%</span>
+                      </div>
+                      <div class="skill-progress-bar">
+                        <div class="skill-progress" style="width: 90%;"></div>
+                      </div>
+                    </div>
+                    <div class="skill-item" data-level="88">
+                      <div class="skill-meta">
+                        <span class="skill-name">Scikit-Learn & OpenCV</span>
+                        <span class="skill-percentage">88%</span>
+                      </div>
+                      <div class="skill-progress-bar">
+                        <div class="skill-progress" style="width: 88%;"></div>
+                      </div>
+                    </div>
+                    <div class="skill-item" data-level="82">
+                      <div class="skill-meta">
+                        <span class="skill-name">Hugging Face</span>
+                        <span class="skill-percentage">82%</span>
+                      </div>
+                      <div class="skill-progress-bar">
+                        <div class="skill-progress" style="width: 82%;"></div>
+                      </div>
+                    </div>
+                    <div class="skill-item" data-level="80">
+                      <div class="skill-meta">
+                        <span class="skill-name">Streamlit & Web Frameworks</span>
+                        <span class="skill-percentage">80%</span>
+                      </div>
+                      <div class="skill-progress-bar">
+                        <div class="skill-progress" style="width: 80%;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Category 3 -->
+                <div class="skill-category scroll-reveal">
+                  <h3>Developer Tools & GrowthOps</h3>
+                  <div class="skill-items">
+                    <div class="skill-item" data-level="85">
+                      <div class="skill-meta">
+                        <span class="skill-name">Git & Git Workflows</span>
+                        <span class="skill-percentage">85%</span>
+                      </div>
+                      <div class="skill-progress-bar">
+                        <div class="skill-progress" style="width: 85%;"></div>
+                      </div>
+                    </div>
+                    <div class="skill-item" data-level="80">
+                      <div class="skill-meta">
+                        <span class="skill-name">AWS Certified Practitioner & Vercel</span>
+                        <span class="skill-percentage">80%</span>
+                      </div>
+                      <div class="skill-progress-bar">
+                        <div class="skill-progress" style="width: 80%;"></div>
+                      </div>
+                    </div>
+                    <div class="skill-item" data-level="80">
+                      <div class="skill-meta">
+                        <span class="skill-name">PlantUML & Dialogflow NLP</span>
+                        <span class="skill-percentage">80%</span>
+                      </div>
+                      <div class="skill-progress-bar">
+                        <div class="skill-progress" style="width: 80%;"></div>
+                      </div>
+                    </div>
+                    <div class="skill-item" data-level="75">
+                      <div class="skill-meta">
+                        <span class="skill-name">Growth Marketing/Automation</span>
+                        <span class="skill-percentage">75%</span>
+                      </div>
+                      <div class="skill-progress-bar">
+                        <div class="skill-progress" style="width: 75%;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Leadership Section -->
+          <section class="leadership-section" id="leadership">
+            <div class="section-container">
+              <h2 class="section-title scroll-reveal">Leadership & Campus Engagement</h2>
+              <p class="section-subtitle scroll-reveal">Translating technical coordination and execution to team
+                strategies,
+                operations, and community service.</p>
+
+              <div class="leadership-cards">
+                <!-- Football Captain -->
+                <div class="leadership-card scroll-reveal">
+                  <div class="l-card-header">
+                    <span class="l-icon">⚽</span>
+                    <div>
+                      <h3>Varsity Football Captain</h3>
+                      <span class="l-duration">JUIT Football Club</span>
+                    </div>
+                  </div>
+                  <p>
+                    Leading squad tactical routines, hosting regional trials, organizing matches, and directing
+                    strategies.
+                    Emphasizing communication, high-intensity play, and structural discipline.
+                  </p>
+                  <div class="tactical-board">
+                    <svg viewBox="0 0 200 120" class="field-svg" aria-label="Football tactical board diagram">
+                      <rect x="0" y="0" width="200" height="120" rx="6" fill="var(--color-bg-subtle)"
+                        stroke="var(--color-border)" stroke-width="1.5"></rect>
+                      <line x1="100" y1="0" x2="100" y2="120" stroke="var(--color-border)" stroke-dasharray="3,3">
+                      </line>
+                      <circle cx="100" cy="60" r="20" fill="none" stroke="var(--color-border)" stroke-dasharray="3,3">
+                      </circle>
+                      <!-- Nodes -->
+                      <circle cx="50" cy="30" r="4" fill="var(--color-primary)"></circle>
+                      <circle cx="50" cy="90" r="4" fill="var(--color-primary)"></circle>
+                      <circle cx="150" cy="60" r="4" fill="var(--color-secondary)"></circle>
+                      <circle cx="80" cy="60" r="5" fill="var(--color-primary)"></circle>
+                      <!-- Pass arrow -->
+                      <path d="M 85 60 Q 115 50 145 58" fill="none" stroke="var(--color-accent)" stroke-width="1.5"
+                        stroke-linecap="round" stroke-dasharray="3,2"></path>
+                      <polygon points="145,58 141,54 139,60" fill="var(--color-accent)"></polygon>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Parakram Organizer -->
+                <div class="leadership-card scroll-reveal">
+                  <div class="l-card-header">
+                    <span class="l-icon">🏆</span>
+                    <div>
+                      <h3>Parakram '25 Sports Fest Organizer</h3>
+                      <span class="l-duration">Management & Logistics Lead</span>
+                    </div>
+                  </div>
+                  <p>
+                    Managed inter-college team pipelines, organized match grids for 5+ sports events, coordinated campus
+                    logistics, and curated sports budget allocations.
+                  </p>
+                  <div class="fest-stats">
+                    <div class="f-stat-item">
+                      <span class="f-num">12+</span>
+                      <span class="f-lbl">Universities Participating</span>
+                    </div>
+                    <div class="f-stat-item">
+                      <span class="f-num">500+</span>
+                      <span class="f-lbl">Athletes Hosted</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- NCC Cadet -->
+                <div class="leadership-card scroll-reveal">
+                  <div class="l-card-header">
+                    <span class="l-icon">🎖️</span>
+                    <div>
+                      <h3>National Cadet Corps (NCC)</h3>
+                      <span class="l-duration">C-Certificate Candidate</span>
+                    </div>
+                  </div>
+                  <p>
+                    Completed rigorous physical camps, drills, and weapon training protocols. Developed extreme
+                    structural
+                    accountability, duty awareness, and team alignment.
+                  </p>
+                  <div class="ncc-badge">
+                    <div class="badge-emblem">NCC</div>
+                    <div class="badge-info">
+                      <strong>"C" Certificate</strong>
+                      <span>Highest Cadet Proficiency</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Contact Section -->
+          <section class="contact-section" id="contact">
+            <div class="section-container">
+              <h2 class="section-title scroll-reveal">Let's Connect</h2>
+              <p class="section-subtitle scroll-reveal">Whether you want to discuss AI integrations, custom automation,
+                or a
+                project collaboration, feel free to drop a message!</p>
+
+              <div class="contact-grid">
+                <div class="contact-info scroll-reveal">
+                  <h3>Contact Information</h3>
+                  <p>Have an interesting project or B2B automation requirement? Get in touch!</p>
+
+                  <ul class="contact-details-list">
+                    <li>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                        </path>
+                      </svg>
+                      <a href="tel:94180-46344">94180-46344</a>
+                    </li>
+                    <li>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                      </svg>
+                      <a href="mailto:suryanshxharma@gmail.com">suryanshxharma@gmail.com</a>
+                    </li>
+                    <li>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                          d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                        </path>
+                      </svg>
+                      <a href="https://github.com/suryanshxharma" target="_blank">github.com/suryanshxharma</a>
+                    </li>
+                    <li>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                          d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                      </svg>
+                      <span>DD colony Maranda H.P.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <form class="contact-form scroll-reveal" id="portfolio-contact-form" novalidate>
+                  <div class="form-group">
+                    <input type="text" id="contact-name" name="name" required placeholder=" ">
+                    <label for="contact-name">Your Name</label>
+                    <span class="field-error-message" id="error-name">Please enter your name.</span>
+                  </div>
+
+                  <div class="form-group">
+                    <input type="email" id="contact-email" name="email" required placeholder=" ">
+                    <label for="contact-email">Email Address</label>
+                    <span class="field-error-message" id="error-email">Please enter a valid email.</span>
+                  </div>
+
+                  <div class="form-group">
+                    <textarea id="contact-message" name="message" required placeholder=" " rows="5"></textarea>
+                    <label for="contact-message">Your Message</label>
+                    <span class="field-error-message" id="error-message">Message cannot be empty.</span>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary btn-submit">
+                    <span class="btn-text">Send Message</span>
+                    <span class="btn-spinner" aria-hidden="true"></span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <p>&copy; 2026 Suryansh Sharma. All Rights Reserved.</p>
+      <p class="footer-credits">Built with Vanilla HTML, CSS, & Javascript. Designed to WOW.</p>
+    </div>
+  </footer>
+
+  <!-- ==================== DIALOGS & DEMOS ==================== -->
+
+  <!-- Dialog 1: Crop Disease Detection -->
+  <dialog id="dialog-crop" class="project-dialog">
+    <div class="dialog-content">
+      <button class="dialog-close-btn" aria-label="Close dialog" data-close="dialog-crop">&times;</button>
+
+      <div class="dialog-body-layout">
+        <div class="dialog-info-section">
+          <h2>Explainable-AI-based-Crop-Disease-Detection-System-using-Leaf-Image-Analysis</h2>
+          <div class="dialog-tags">
+            <span class="tag">ResNet-50</span>
+            <span class="tag">ViT</span>
+            <span class="tag">XAI</span>
+            <span class="tag">Grad-CAM</span>
+            <span class="tag">LIME</span>
+            <span class="tag">Bayesian Uncertainty</span>
+          </div>
+
+          <p>
+            Developed and fine-tuned a cutting-edge Vision Transformer (ViT) framework paired with a ResNet-50 backbone,
+            implementing global multi-head self-attention mechanisms to effectively capture long-range pathological
+            visual symptoms over localised CNN-only filters.
+          </p>
+
+          <h3>Key Benchmarks & Pipeline</h3>
+          <ul>
+            <li><strong>State-of-the-Art Diagnostic Benchmarks</strong>: Reached a top-tier 97.91% validation accuracy
+              and a 0.99 micro-average ROC-AUC score across 38 diverse pathological crop classes on the PlantVillage and
+              PlantDoc datasets, outperforming established baseline models and edge architectures such as EdgePlantNet.
+            </li>
+            <li><strong>Responsible AI Pipeline</strong>: Integrated post-hoc explainability modules (Grad-CAM and LIME)
+              alongside a Bayesian Uncertainty Tier (Monte Carlo Dropout) to eliminate "black-box" limitations, align
+              model confidence via Expected Calibration Error (ECE), and ensure less than a 12% accuracy drop under
+              severe input noise.</li>
+          </ul>
+        </div>
+
+        <div class="dialog-demo-section">
+          <h3>Interactive Demo: Calibration & Heatmaps</h3>
+          <p class="text-sm text-dim">Adjust the Monte Carlo Dropout forward passes below to observe changes in
+            prediction confidence and Expected Calibration Error (ECE).</p>
+
+          <div class="demo-widget-box crop-widget">
+            <div class="control-row">
+              <label for="mc-dropout-slider">MC Dropout Passes: <span id="mc-val">10</span></label>
+              <input type="range" id="mc-dropout-slider" min="1" max="50" value="10">
+            </div>
+
+            <div class="metrics-grid">
+              <div class="metric-box">
+                <span class="m-val" id="metric-ece">0.052</span>
+                <span class="m-lbl">Expected Calibration Error</span>
+              </div>
+              <div class="metric-box">
+                <span class="m-val" id="metric-confidence">84.2%</span>
+                <span class="m-lbl">Mean Calibration Confidence</span>
+              </div>
+            </div>
+
+            <div class="visual-interactive-leaf">
+              <div class="leaf-image-container">
+                <img src="https://images.unsplash.com/photo-1592150621744-aca64f48394a?auto=format&fit=crop&q=80&w=400"
+                  alt="Plant leaf example" class="leaf-base">
+                <div class="gradcam-overlay" id="gradcam-heatmap"></div>
+              </div>
+              <p class="text-xs text-center text-dim mt-2">Hover or tap on leaf to activate Grad-CAM activation heatmap
+                overlay.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Dialog 2: Stock Prediction -->
+  <dialog id="dialog-stock" class="project-dialog">
+    <div class="dialog-content">
+      <button class="dialog-close-btn" aria-label="Close dialog" data-close="dialog-stock">&times;</button>
+
+      <div class="dialog-body-layout">
+        <div class="dialog-info-section">
+          <h2>Stock Price Prediction</h2>
+          <div class="dialog-tags">
+            <span class="tag">TensorFlow</span>
+            <span class="tag">LSTM</span>
+            <span class="tag">GRU</span>
+            <span class="tag">scikit-learn</span>
+            <span class="tag">yfinance</span>
+          </div>
+
+          <p>
+            Architected an end-to-end stock forecasting pipeline using TensorFlow, scikit-learn, and yfinance to compare
+            sequential models (LSTM, GRU) against traditional baselines.
+          </p>
+
+          <h3>Key Architecture & Features</h3>
+          <ul>
+            <li><strong>21 Financial Features</strong>: Engineered across trend, momentum, and volume (e.g., RSI, MACD,
+              Bollinger Bands) to deeply represent temporal market states.</li>
+            <li><strong>Eliminated Temporal Data Leakage</strong>: Enforced strict chronological splits, isolated
+              preprocessing, and leakage-safe sliding-window generation for valid out-of-sample testing.</li>
+            <li><strong>Quantified Model Trade-offs</strong>: Compared performance across MAE, RMSE, MAPE, and
+              Directional Accuracy, proving GRUs delivered faster training with fewer parameters without sacrificing
+              accuracy.</li>
+          </ul>
+        </div>
+
+        <div class="dialog-demo-section">
+          <h3>Interactive Demo: GRU vs LSTM Metrics</h3>
+          <p class="text-sm text-dim">Select active model architectures and toggle features to compare the statistical
+            forecasting criteria.</p>
+
+          <div class="demo-widget-box stock-widget">
+            <div class="control-row">
+              <label for="model-selector">Compare Model:</label>
+              <select id="model-selector">
+                <option value="gru">Gated Recurrent Unit (GRU)</option>
+                <option value="lstm">Long Short-Term Memory (LSTM)</option>
+                <option value="both">Compare Both Overlay</option>
+              </select>
+            </div>
+
+            <div class="custom-metrics-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>GRU</th>
+                    <th>LSTM</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr id="row-mae">
+                    <td>MAE ($)</td>
+                    <td class="highlight-val">1.24</td>
+                    <td>1.45</td>
+                  </tr>
+                  <tr id="row-rmse">
+                    <td>RMSE ($)</td>
+                    <td class="highlight-val">1.82</td>
+                    <td>2.10</td>
+                  </tr>
+                  <tr id="row-mape">
+                    <td>MAPE (%)</td>
+                    <td class="highlight-val">0.91%</td>
+                    <td>1.12%</td>
+                  </tr>
+                  <tr id="row-dir">
+                    <td>Directional Acc.</td>
+                    <td>56.4%</td>
+                    <td class="highlight-val">58.1%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="stock-svg-wrapper">
+              <svg viewBox="0 0 200 80" class="canvas-stock-chart" id="stock-chart-svg">
+                <!-- Grid Lines -->
+                <line x1="0" y1="20" x2="200" y2="20" stroke="var(--color-border)" stroke-width="0.5"></line>
+                <line x1="0" y1="40" x2="200" y2="40" stroke="var(--color-border)" stroke-width="0.5"></line>
+                <line x1="0" y1="60" x2="200" y2="60" stroke="var(--color-border)" stroke-width="0.5"></line>
+
+                <!-- Curves -->
+                <!-- Actual -->
+                <path d="M 10 70 L 30 65 L 50 68 L 70 50 L 90 55 L 110 38 L 130 42 L 150 25 L 170 28 L 190 10"
+                  fill="none" stroke="var(--color-text)" stroke-width="1" stroke-linecap="round" id="path-actual">
+                </path>
+                <!-- GRU Pred -->
+                <path d="M 10 70 L 30 63 L 50 66 L 70 48 L 90 58 L 110 36 L 130 40 L 150 28 L 170 30 L 190 12"
+                  fill="none" stroke="var(--color-primary)" stroke-width="1.5" stroke-dasharray="3,1" id="path-gru">
+                </path>
+                <!-- LSTM Pred -->
+                <path d="M 10 70 L 30 67 L 50 71 L 70 54 L 90 52 L 110 42 L 130 45 L 150 22 L 170 24 L 190 8"
+                  fill="none" stroke="var(--color-secondary)" stroke-width="1.5" stroke-dasharray="3,1" id="path-lstm">
+                </path>
+              </svg>
+              <div class="legend-row">
+                <span class="leg-item"><span class="leg-color col-actual"></span>Actual</span>
+                <span class="leg-item" id="leg-gru"><span class="leg-color col-gru"></span>GRU</span>
+                <span class="leg-item" id="leg-lstm"><span class="leg-color col-lstm"></span>LSTM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Dialog 3: Typewise Growth Agent -->
+  <dialog id="dialog-agent" class="project-dialog">
+    <div class="dialog-content">
+      <button class="dialog-close-btn" aria-label="Close dialog" data-close="dialog-agent">&times;</button>
+
+      <div class="dialog-body-layout">
+        <div class="dialog-info-section">
+          <h2>Typewise AI Growth Agent</h2>
+          <div class="dialog-tags">
+            <span class="tag">LLM Orchestration</span>
+            <span class="tag">Agentic Workflows</span>
+            <span class="tag">Social Crawlers</span>
+            <span class="tag">Lead Scoring</span>
+          </div>
+
+          <p>
+            An autonomous, multi-agent AI system engineered to discover, score, and customize pitch proposals for SaaS
+            clients directly from Reddit.
+          </p>
+
+          <h3>Multi-Agent Coordination</h3>
+          <ul>
+            <li><strong>Crawler Agent</strong>: Monitored target subreddits using specific NLP keyword criteria.</li>
+            <li><strong>Intent Extractor</strong>: Checked user descriptions to map core friction pain points.</li>
+            <li><strong>Lead Scorer</strong>: Merged quantitative weights (recency, community karma, upvotes) with
+              qualitative relevance.</li>
+            <li><strong>Sales Copywriter</strong>: Synthesized hyper-contextualized product fit pitches.</li>
+          </ul>
+        </div>
+
+        <div class="dialog-demo-section">
+          <h3>Interactive Demo: Agent Lead Logs</h3>
+          <p class="text-sm text-dim">Simulate the multi-agent queue processing subreddits and qualifying leads below.
+          </p>
+
+          <div class="demo-widget-box agent-widget">
+            <button class="btn btn-sm btn-primary" id="btn-trigger-agent-simulation">Run Agent Pipeline</button>
+
+            <div class="agent-simulation-console" id="agent-console-logs">
+              <p class="console-placeholder">[Console idle. Click run button to inspect agent steps...]</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Dialog 4: BillFlow WA -->
+  <dialog id="dialog-billflow" class="project-dialog">
+    <div class="dialog-content">
+      <button class="dialog-close-btn" aria-label="Close dialog" data-close="dialog-billflow">&times;</button>
+
+      <div class="dialog-body-layout">
+        <div class="dialog-info-section">
+          <h2>BillFlow WA: WhatsApp Billing SaaS</h2>
+          <div class="dialog-tags">
+            <span class="tag">WhatsApp API</span>
+            <span class="tag">UPI QR Integration</span>
+            <span class="tag">Web Audio API</span>
+            <span class="tag">SaaS Dashboard</span>
+          </div>
+
+          <p>
+            A high-efficiency billing utility and digital receipting SaaS built for Small and Medium Businesses (SMBs).
+          </p>
+
+          <h3>Key Implementations</h3>
+          <ul>
+            <li><strong>Zero-Cost WhatsApp Messages</strong>: Created custom redirection protocols using official web
+              linkages to bypass premium message templates.</li>
+            <li><strong>Scan-to-Pay QR</strong>: Generated instantaneous UPI-linked payment graphics encoding dynamic
+              bill values onto the client receipts.</li>
+            <li><strong>Background Cash Chime</strong>: Synthetic register cash register chimes triggered on transaction
+              alerts via the Web Audio API.</li>
+          </ul>
+        </div>
+
+        <div class="dialog-demo-section">
+          <h3>Interactive Demo: Synthetic Audio Chime</h3>
+          <p class="text-sm text-dim">Trigger the payment sound or generate receipt billing transactions using the
+            controls below.</p>
+
+          <div class="demo-widget-box billflow-widget">
+            <div class="bill-generator">
+              <div class="input-inline">
+                <label for="bill-amount">Amount (₹):</label>
+                <input type="number" id="bill-amount" value="749.00" min="1" step="0.01">
+              </div>
+              <button class="btn btn-sm btn-primary" id="btn-generate-upi">Generate UPI Receipt</button>
+            </div>
+
+            <div class="receipt-mockup-area" id="billflow-receipt-output" style="display: none;">
+              <div class="mock-receipt">
+                <div class="mock-title">BILLFLOW TRANSACTION</div>
+                <div class="mock-line">========================</div>
+                <div class="mock-details">
+                  <span>Merchant: JUIT Store</span>
+                  <span>Txn ID: BF-92384729</span>
+                  <span class="mock-price">Amount Due: <strong id="receipt-show-amount">₹749.00</strong></span>
+                </div>
+                <div class="mock-line">========================</div>
+                <!-- Dynamic QR representation -->
+                <div class="mock-qr-box">
+                  <div class="mock-qr-graphic">
+                    <svg viewBox="0 0 100 100" class="qr-svg" width="90" height="90">
+                      <!-- Simulated QR structure using paths -->
+                      <rect x="0" y="0" width="30" height="30" fill="currentColor"></rect>
+                      <rect x="5" y="5" width="20" height="20" fill="var(--color-bg)"></rect>
+                      <rect x="10" y="10" width="10" height="10" fill="currentColor"></rect>
+
+                      <rect x="70" y="0" width="30" height="30" fill="currentColor"></rect>
+                      <rect x="75" y="5" width="20" height="20" fill="var(--color-bg)"></rect>
+                      <rect x="80" y="10" width="10" height="10" fill="currentColor"></rect>
+
+                      <rect x="0" y="70" width="30" height="30" fill="currentColor"></rect>
+                      <rect x="5" y="75" width="20" height="20" fill="var(--color-bg)"></rect>
+                      <rect x="10" y="80" width="10" height="10" fill="currentColor"></rect>
+
+                      <!-- Dots -->
+                      <rect x="40" y="10" width="10" height="10" fill="currentColor"></rect>
+                      <rect x="50" y="30" width="10" height="10" fill="currentColor"></rect>
+                      <rect x="80" y="40" width="10" height="10" fill="currentColor"></rect>
+                      <rect x="40" y="70" width="20" height="20" fill="currentColor"></rect>
+                      <rect x="70" y="80" width="10" height="10" fill="currentColor"></rect>
+                      <rect x="80" y="70" width="10" height="10" fill="currentColor"></rect>
+                    </svg>
+                  </div>
+                  <span class="qr-sub-text">UPI Code Value Encoded</span>
+                </div>
+
+                <button class="btn btn-sm btn-primary btn-chime-trigger" id="btn-trigger-chime">
+                  <span class="bell-ring-icon">🔔</span> Simulate Success Payment (Chime!)
+                </button>
+              </div>
+            </div>
+
+            <div class="synthesizer-controls">
+              <label for="chime-volume">Synth Volume: <span id="vol-val">60%</span></label>
+              <input type="range" id="chime-volume" min="0" max="100" value="60">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
