@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <a href="https://suryansh.dev"><img src="https://img.shields.io/badge/Portfolio-suryansh.dev-6366f1?style=flat-square&logo=googlechrome&logoColor=white" alt="Portfolio Badge" /></a>
+  <a href="https://suryanshxharma.vercel.app/"><img src="https://img.shields.io/badge/Portfolio-suryanshxharma-6366f1?style=flat-square&logo=googlechrome&logoColor=white" alt="Portfolio Badge" /></a>
   <a href="mailto:suryanshxharma@gmail.com"><img src="https://img.shields.io/badge/Email-suryanshxharma%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white" alt="Email Badge" /></a>
   <a href="https://github.com/suryanshxharma"><img src="https://img.shields.io/badge/GitHub-suryanshxharma-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub Badge" /></a>
 </p>
@@ -211,7 +211,7 @@ open_to: "Collaborating on next-generation open source developer tooling"
 <p align="center">
   <a href="mailto:suryanshxharma@gmail.com"><img src="https://img.shields.io/badge/Gmail-suryanshxharma%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
   <a href="https://github.com/suryanshxharma"><img src="https://img.shields.io/badge/GitHub-suryanshxharma-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
-  <a href="https://suryansh.dev"><img src="https://img.shields.io/badge/Portfolio-suryansh.dev-6366f1?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
+  <a href="https://suryanshxharma.vercel.app/"><img src="https://img.shields.io/badge/Portfolio-suryanshxharma-6366f1?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
 </p>
 
 ---
