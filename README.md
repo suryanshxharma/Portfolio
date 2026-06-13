@@ -15,13 +15,13 @@
   <a href="https://suryansh.dev"><img src="https://img.shields.io/badge/Portfolio-suryansh.dev-6366f1?style=flat-square&logo=googlechrome&logoColor=white" alt="Portfolio Badge" /></a>
   <a href="https://linkedin.com/in/suryansh-sharma"><img src="https://img.shields.io/badge/LinkedIn-Suryansh%20Sharma-0077B5?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn Badge" /></a>
   <a href="mailto:suryansh.sharma@gmail.com"><img src="https://img.shields.io/badge/Email-suryansh.sharma%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white" alt="Email Badge" /></a>
-  <a href="https://github.com/suryanshx"><img src="https://img.shields.io/badge/GitHub-suryanshx-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub Badge" /></a>
+  <a href="https://github.com/suryanshxharma"><img src="https://img.shields.io/badge/GitHub-suryanshxharma-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub Badge" /></a>
 </p>
 
 <p align="center">
-  <img src="https://komarev.com/ghvc/?username=suryanshx&color=violet&style=flat-square" alt="Profile Views" />
-  <img src="https://img.shields.io/github/followers/suryanshx?style=flat-square&color=A855F7&logo=github" alt="Followers" />
-  <img src="https://img.shields.io/github/stars/suryanshx?style=flat-square&color=A855F7&logo=github" alt="Stars" />
+  <img src="https://komarev.com/ghvc/?username=suryanshxharma&color=violet&style=flat-square" alt="Profile Views" />
+  <img src="https://img.shields.io/github/followers/suryanshxharma?style=flat-square&color=A855F7&logo=github" alt="Followers" />
+  <img src="https://img.shields.io/github/stars/suryanshxharma?style=flat-square&color=A855F7&logo=github" alt="Stars" />
 </p>
 
 ---
@@ -97,7 +97,7 @@ A deep learning classifier designed to diagnose crop pathology with built-in unc
 | **Performance** | <80ms inference latency under concurrent loads |
 | **Security** | Payload sanitization, strictly isolated local sandbox |
 | **Impact** | Improved diagnosis reliability by 22% and reduced false treatment applications |
-| **Repository** | [GitHub Repo](https://github.com/suryanshx/crop-disease-calibration) |
+| **Repository** | [GitHub Repo](https://github.com/suryanshxharma/crop-disease-calibration) |
 
 ### Professional Summary
 Designed and implemented the neural architecture for crop disease classification. Addressed model overconfidence by mapping Expected Calibration Error (ECE) shifts in real-time. Built a responsive web UI displaying the dynamic shift of confidence levels based on Monte Carlo Dropout iterations.
@@ -117,7 +117,7 @@ A real-time financial tracking and projection interface displaying simulated mar
 | **Performance** | Constant 60 FPS graph rendering via hardware-accelerated Canvas |
 | **Security** | JWT-authenticated WebSocket connection channels |
 | **Impact** | Streamlined portfolio performance audits for high-frequency trading simulations |
-| **Repository** | [GitHub Repo](https://github.com/suryanshx/stock-predictor-curves) |
+| **Repository** | [GitHub Repo](https://github.com/suryanshxharma/stock-predictor-curves) |
 
 ### Professional Summary
 Constructed a high-fidelity visualizer for volatile stock datasets. Designed reactive data-binding overlays allowing traders to toggle between baseline historical datasets, simulated forecast margins, and custom moving averages instantaneously.
@@ -137,7 +137,7 @@ An autonomous crawler and agent workflow that searches, identifies, and qualifie
 | **Performance** | Multithreaded queue handling 50 concurrent crawling nodes |
 | **Security** | Rotating proxies, strict data compliance, and PII masking |
 | **Impact** | Generated 1500+ qualified leads per week with 85% qualification accuracy |
-| **Repository** | [GitHub Repo](https://github.com/suryanshx/b2b-growth-agent) |
+| **Repository** | [GitHub Repo](https://github.com/suryanshxharma/b2b-growth-agent) |
 
 ### Professional Summary
 Developed an intelligent intent analyzer pipeline. Designed crawler nodes to parse online communities for target keywords, which are then evaluated by LLM decision models. Qualified prospects are structured and stored dynamically in a relational database.
@@ -157,7 +157,7 @@ A billing and checkout generator utilizing raw sound synthesis to construct high
 | **Performance** | Sub-millisecond initialization and play latency |
 | **Security** | Zero-dependency design eliminating third-party supply chain vectors |
 | **Impact** | Eliminated asset load latency, resulting in responsive UI interactions |
-| **Repository** | [GitHub Repo](https://github.com/suryanshx/billflow-audio-chime) |
+| **Repository** | [GitHub Repo](https://github.com/suryanshxharma/billflow-audio-chime) |
 
 ### Professional Summary
 Pioneered custom billing synthesizer algorithms. Created sine and triangle oscillator nodes using Web Audio API to dynamically generate realistic register cash chimes, complete with decay, frequency modulation, and custom gain configurations.
@@ -200,11 +200,11 @@ Pioneered custom billing synthesizer algorithms. Created sine and triangle oscil
 ## 📊 GitHub Analytics
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=suryanshx&show_icons=true&theme=calm&bg_color=0d1117&title_color=a855f7&icon_color=8a2be2&text_color=c9d1d9" alt="Suryansh's GitHub Stats" />
+  <img src="https://github-readme-stats.vercel.app/api?username=suryanshxharma&show_icons=true&theme=calm&bg_color=0d1117&title_color=a855f7&icon_color=8a2be2&text_color=c9d1d9" alt="Suryansh's GitHub Stats" />
   <br/><br/>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=suryanshx&theme=dark&background=0d1117&fire=a855f7&ring=8a2be2&labels=c9d1d9" alt="Suryansh's GitHub Streak" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=suryanshxharma&theme=dark&background=0d1117&fire=a855f7&ring=8a2be2&labels=c9d1d9" alt="Suryansh's GitHub Streak" />
   <br/><br/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=suryanshx&layout=compact&theme=calm&bg_color=0d1117&title_color=a855f7&icon_color=8a2be2&text_color=c9d1d9" alt="Suryansh's Top Languages" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=suryanshxharma&layout=compact&theme=calm&bg_color=0d1117&title_color=a855f7&icon_color=8a2be2&text_color=c9d1d9" alt="Suryansh's Top Languages" />
 </div>
 
 ---
@@ -213,7 +213,7 @@ Pioneered custom billing synthesizer algorithms. Created sine and triangle oscil
 
 <div align="center">
   <a href="https://github.com/ryo-ma/github-profile-trophy">
-    <img src="https://github-profile-trophy.herokuapp.com/?username=suryanshx&theme=juicycast&no-bg=true&no-frame=true" alt="GitHub Trophies" />
+    <img src="https://github-profile-trophy.herokuapp.com/?username=suryanshxharma&theme=juicycast&no-bg=true&no-frame=true" alt="GitHub Trophies" />
   </a>
 </div>
 
@@ -222,7 +222,7 @@ Pioneered custom billing synthesizer algorithms. Created sine and triangle oscil
 ## 📈 Contribution Activity
 
 <div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=suryanshx&theme=react-dark&bg_color=0d1117&color=a855f7&line=8a2be2&point=ffffff&area=true&hide_border=true" alt="Contribution Graph" width="100%" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=suryanshxharma&theme=react-dark&bg_color=0d1117&color=a855f7&line=8a2be2&point=ffffff&area=true&hide_border=true" alt="Contribution Graph" width="100%" />
 </div>
 
 ---
@@ -230,7 +230,7 @@ Pioneered custom billing synthesizer algorithms. Created sine and triangle oscil
 ## 🐍 Contribution Snake
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/suryanshx/suryanshx/output/github-contribution-grid-snake-dark.svg" alt="Snake Contribution Graph" width="100%" />
+  <img src="https://raw.githubusercontent.com/suryanshxharma/suryanshxharma/output/github-contribution-grid-snake-dark.svg" alt="Snake Contribution Graph" width="100%" />
 </div>
 
 ---
@@ -251,7 +251,7 @@ open_to: "Collaborating on next-generation open source developer tooling"
 <p align="center">
   <a href="mailto:suryansh.sharma@gmail.com"><img src="https://img.shields.io/badge/Gmail-suryansh.sharma%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
   <a href="https://linkedin.com/in/suryansh-sharma"><img src="https://img.shields.io/badge/LinkedIn-Suryansh%20Sharma-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
-  <a href="https://github.com/suryanshx"><img src="https://img.shields.io/badge/GitHub-suryanshx-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
+  <a href="https://github.com/suryanshxharma"><img src="https://img.shields.io/badge/GitHub-suryanshxharma-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
   <a href="https://suryansh.dev"><img src="https://img.shields.io/badge/Portfolio-suryansh.dev-6366f1?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
 </p>
 
