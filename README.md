@@ -3,23 +3,21 @@
 </p>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Outfit&size=24&duration=3000&pause=1000&color=a78bfa&center=true&vCenter=true&width=600&lines=Machine+Learning+Engineer;Full-Stack+Software+Engineer;AI+Product+Architect" alt="Typing Animation" />
+  <img src="https://readme-typing-svg.demolab.com?font=Outfit&size=24&duration=3000&pause=1000&color=a78bfa&center=true&vCenter=true&width=600&lines=Machine+Learning+Engineer;Technical+Growth+Hacker" alt="Typing Animation" />
 </p>
 
 <p align="center">
   <a href="https://img.shields.io/badge/Education-B.Tech%20in%20Computer%20Science-8A2BE2?style=flat-square&logo=academia&logoColor=white"><img src="https://img.shields.io/badge/Education-B.Tech%20in%20Computer%20Science-8A2BE2?style=flat-square&logo=academia&logoColor=white" alt="Academic Badge" /></a>
-  <a href="https://img.shields.io/badge/Location-Delhi%2C%20India-blueviolet?style=flat-square&logo=googlemaps&logoColor=white"><img src="https://img.shields.io/badge/Location-Delhi%2C%20India-blueviolet?style=flat-square&logo=googlemaps&logoColor=white" alt="Location Badge" /></a>
+  <a href="https://img.shields.io/badge/Location-HimachalPardesh %2C%20India-blueviolet?style=flat-square&logo=googlemaps&logoColor=white"><img src="https://img.shields.io/badge/Location-HimachalPardesh%2C%20India-blueviolet?style=flat-square&logo=googlemaps&logoColor=white" alt="Location Badge" /></a>
 </p>
 
 <p align="center">
   <a href="https://suryansh.dev"><img src="https://img.shields.io/badge/Portfolio-suryansh.dev-6366f1?style=flat-square&logo=googlechrome&logoColor=white" alt="Portfolio Badge" /></a>
-  <a href="https://linkedin.com/in/suryansh-sharma"><img src="https://img.shields.io/badge/LinkedIn-Suryansh%20Sharma-0077B5?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn Badge" /></a>
-  <a href="mailto:suryansh.sharma@gmail.com"><img src="https://img.shields.io/badge/Email-suryansh.sharma%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white" alt="Email Badge" /></a>
+  <a href="mailto:suryanshxharma@gmail.com"><img src="https://img.shields.io/badge/Email-suryanshxharma%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white" alt="Email Badge" /></a>
   <a href="https://github.com/suryanshxharma"><img src="https://img.shields.io/badge/GitHub-suryanshxharma-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub Badge" /></a>
 </p>
 
 <p align="center">
-  <img src="https://komarev.com/ghvc/?username=suryanshxharma&color=violet&style=flat-square" alt="Profile Views" />
   <img src="https://img.shields.io/github/followers/suryanshxharma?style=flat-square&color=A855F7&logo=github" alt="Followers" />
   <img src="https://img.shields.io/github/stars/suryanshxharma?style=flat-square&color=A855F7&logo=github" alt="Stars" />
 </p>
@@ -28,11 +26,15 @@
 
 ## 💻 About Me
 
-I am a highly driven Software Engineer and Machine Learning specialist with a product engineering mindset. My focus lies at the intersection of scalable distributed systems, deep learning architectures, and high-performance full-stack applications. With a solid foundation in algorithm design and cloud deployment patterns, I build premium solutions designed for performance, resilience, and business impact.
+A versatile and execution-focused Computer Science student who bridges the gap between complex AI
+engineering and real-world business growth. Proven track record of architecting advanced deep learning
+pipelines while building AI-driven web applications that drive user engagement and lead generation. Deeply
+interested in leveraging machine learning and automation to solve technical bottlenecks and scale digital
+products. A fast learner and collaborative problem-solver eager to bring a blend of engineering rigor and growth-
+minded adaptability to a fast-paced startup team.
 
-- 🚀 **Software Engineering**: Specialized in building responsive, asynchronous, and accessible web experiences.
 - 🧠 **AI/ML Engineering**: Designing explainable, calibrated neural network models and autonomous agent workflows.
-- ⚙️ **Product Engineering**: Crafting systems with a focus on core web vitals, strict security, and modular clean architecture.
+- ⚙️ **Technical Growth Hacker**: Crafting systems with a focus on Machine Learning applications, with strict security, and modular, clean architecture.
 - 🤝 **Open to**: Collaborative research initiatives, advanced software engineering roles, and zero-to-one product engineering.
 
 ---
@@ -42,21 +44,21 @@ I am a highly driven Software Engineer and Machine Learning specialist with a pr
 ### Languages
 <p align="left">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=py,js,ts,cpp,sql,rust&theme=dark" />
+    <img src="https://skillicons.dev/icons?i=py,js,ts,cpp&theme=dark" />
   </a>
 </p>
 
 ### Frontend
 <p align="left">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=react,nextjs,html,css,tailwind,vite&theme=dark" />
+    <img src="https://skillicons.dev/icons?i=react,nextjs,html,css&theme=dark" />
   </a>
 </p>
 
 ### Backend & Databases
 <p align="left">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=nodejs,express,fastapi,postgres,mongodb,redis,firebase,supabase&theme=dark" />
+    <img src="https://skillicons.dev/icons?i=nodejs,fastapi,postgres,mongodb,firebase,supabase&theme=dark" />
   </a>
 </p>
 
@@ -144,10 +146,10 @@ Developed an intelligent intent analyzer pipeline. Designed crawler nodes to par
 </details>
 
 <details>
-<summary><b>🔔 BillFlow Web Audio Cash Chime</b></summary>
+<summary><b>🔔 BillFlow WA</b></summary>
 
 ### Description
-A billing and checkout generator utilizing raw sound synthesis to construct high-fidelity audio feedback when billing events occur. Implemented using the native Web Audio API without bulky external media assets.
+A billing and checkout generator utilising raw sound synthesis to construct high-fidelity audio feedback when billing events occur. Implemented using the native Web Audio API without bulky external media assets.
 
 ### Details & Metrics
 | Dimension | Details |
@@ -172,51 +174,9 @@ Pioneered custom billing synthesizer algorithms. Created sine and triangle oscil
 | Recognition | Details |
 | :--- | :--- |
 | **Hackathon Winner** | Awarded 1st place for building an automated disaster relief routing system. |
-| **Open Source Contributor** | Contributed optimizations to major deep learning calibration repositories. |
-| **Academic Excellence** | Ranked top 5% of the computer science department during graduation. |
+| **Open Source Contributor** | -|
 
 </div>
-
----
-
-## 🎓 Certifications
-
-### AWS
-- <img src="https://img.shields.io/badge/AWS-Certified%20Cloud%20Practitioner-232F3E?style=flat-square&logo=amazonwebservices&logoColor=white" />
-- <img src="https://img.shields.io/badge/AWS-Certified%20Solutions%20Architect-232F3E?style=flat-square&logo=amazonwebservices&logoColor=white" />
-
-### Oracle
-- <img src="https://img.shields.io/badge/Oracle-Certified%20Java%20Associate-F80000?style=flat-square&logo=oracle&logoColor=white" />
-
-### NPTEL
-- <img src="https://img.shields.io/badge/NPTEL-Introduction%20to%20Machine%20Learning-orange?style=flat-square" />
-- <img src="https://img.shields.io/badge/NPTEL-Cloud%20Computing-blue?style=flat-square" />
-
-### Cisco
-- <img src="https://img.shields.io/badge/Cisco-CCNA%20Routing%20%26%20Switching-1C3D5A?style=flat-square&logo=cisco&logoColor=white" />
-
----
-
-## 📊 GitHub Analytics
-
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=suryanshxharma&show_icons=true&theme=calm&bg_color=0d1117&title_color=a855f7&icon_color=8a2be2&text_color=c9d1d9" alt="Suryansh's GitHub Stats" />
-  <br/><br/>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=suryanshxharma&theme=dark&background=0d1117&fire=a855f7&ring=8a2be2&labels=c9d1d9" alt="Suryansh's GitHub Streak" />
-  <br/><br/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=suryanshxharma&layout=compact&theme=calm&bg_color=0d1117&title_color=a855f7&icon_color=8a2be2&text_color=c9d1d9" alt="Suryansh's Top Languages" />
-</div>
-
----
-
-## 🏆 GitHub Trophies
-
-<div align="center">
-  <a href="https://github.com/ryo-ma/github-profile-trophy">
-    <img src="https://github-profile-trophy.herokuapp.com/?username=suryanshxharma&theme=juicycast&no-bg=true&no-frame=true" alt="GitHub Trophies" />
-  </a>
-</div>
-
 ---
 
 ## 📈 Contribution Activity
@@ -239,8 +199,8 @@ Pioneered custom billing synthesizer algorithms. Created sine and triangle oscil
 
 ```yaml
 learning: "Deep Reinforcement Learning & LLM Agent Safety Systems"
-building: "Autonomous multi-agent orchestration frameworks (AGY SDK)"
-exploring: "WebAssembly performance patterns & rust-based serverless execution"
+building: "Autonomous multi-agent orchestration frameworks"
+exploring: "social media automation for increasing reach to find the right audience for startups and businesses"
 open_to: "Collaborating on next-generation open source developer tooling"
 ```
 
@@ -249,8 +209,7 @@ open_to: "Collaborating on next-generation open source developer tooling"
 ## 🤝 Connect With Me
 
 <p align="center">
-  <a href="mailto:suryansh.sharma@gmail.com"><img src="https://img.shields.io/badge/Gmail-suryansh.sharma%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
-  <a href="https://linkedin.com/in/suryansh-sharma"><img src="https://img.shields.io/badge/LinkedIn-Suryansh%20Sharma-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+  <a href="mailto:suryanshxharma@gmail.com"><img src="https://img.shields.io/badge/Gmail-suryanshxharma%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
   <a href="https://github.com/suryanshxharma"><img src="https://img.shields.io/badge/GitHub-suryanshxharma-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
   <a href="https://suryansh.dev"><img src="https://img.shields.io/badge/Portfolio-suryansh.dev-6366f1?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
 </p>
