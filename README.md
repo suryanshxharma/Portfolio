@@ -190,7 +190,7 @@ Pioneered custom billing synthesizer algorithms. Created sine and triangle oscil
 ## 🐍 Contribution Snake
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/suryanshxharma/Portfolio/output/github-contribution-grid-snake-dark.svg" alt="Snake Contribution Graph" width="100%" />
+  <img src="https://raw.githubusercontent.com/suryanshxharma/portfolio/output/github-contribution-grid-snake-dark.svg" alt="Snake Contribution Graph" width="100%" />
 </div>
 
 ---
