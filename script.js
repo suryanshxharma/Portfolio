@@ -105,7 +105,8 @@ function initTerminal() {
       <p>3. <span class="cmd-text">growth-agent</span>    - Social platform crawling multi-agent LLM scoring lead queue.</p>
       <p>4. <span class="cmd-text">billflow-wa</span>     - Free Digital receipts UPI invoice redirect tool with background cash chimes.</p>
       <p>5. <span class="cmd-text">zen-study-timer</span> - Ambient study timer with React 19, Supabase sync & Razorpay Pro SaaS.</p>
-      <p class="text-dim">Type any project name (e.g. <span class="cmd-text">zen-study-timer</span>) to drill down directly.</p>
+      <p>6. <span class="cmd-text">exambro</span>         - AI exam prep copilot with adaptive quiz generation & weakness analytics.</p>
+      <p class="text-dim">Type any project name (e.g. <span class="cmd-text">exambro</span>) to drill down directly.</p>
     `,
     skills: () => `
       <p class="output-success">🛠️ Technical Stack:</p>
@@ -151,6 +152,11 @@ function initTerminal() {
       <p>🧘 Zen Study Timer & Focus Suite:</p>
       <p>React 19 + Vite ambient productivity dashboard with multi-track soundscape audio synth.</p>
       <p>Supabase Cloud user sync & Razorpay Pro subscription payments with webhook verification.</p>
+    `,
+    'exambro': () => `
+      <p>🎓 ExamBro: AI Exam Prep & Study Copilot:</p>
+      <p>Converts lecture notes & syllabus slides into adaptive practice quizzes and flashcard decks.</p>
+      <p>Generates real-time topic weakness heatmaps and step-by-step AI answer explanations.</p>
     `
   };
 
@@ -428,6 +434,9 @@ function initDemos() {
 
   /* --- 5. Zen Study Timer Demo Widget --- */
   initZenTimerDemo();
+
+  /* --- 6. ExamBro Demo Widget --- */
+  initExamBroDemo();
 }
 
 function initZenTimerDemo() {
@@ -506,6 +515,39 @@ function playAmbientTone(freq, volume) {
   } catch (err) {
     console.error('Ambient Audio synth failed:', err);
   }
+}
+
+function initExamBroDemo() {
+  const quizBtns = document.querySelectorAll('.quiz-option-btn');
+  const feedbackBox = document.getElementById('exambro-quiz-feedback');
+
+  quizBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Reset active selections
+      quizBtns.forEach(b => {
+        b.classList.remove('correct-selected', 'wrong-selected');
+      });
+
+      const isCorrect = btn.getAttribute('data-correct') === 'true';
+      if (isCorrect) {
+        btn.classList.add('correct-selected');
+        if (feedbackBox) {
+          feedbackBox.className = 'quiz-explanation-box success';
+          feedbackBox.style.display = 'block';
+          feedbackBox.innerHTML = `<strong>Correct!</strong> Grad-CAM (Gradient-weighted Class Activation Mapping) produces coarse localization maps highlighting key visual regions used by deep CNNs.`;
+        }
+        playAmbientTone(660, 0.3);
+      } else {
+        btn.classList.add('wrong-selected');
+        if (feedbackBox) {
+          feedbackBox.className = 'quiz-explanation-box error';
+          feedbackBox.style.display = 'block';
+          feedbackBox.innerHTML = `<strong>Not quite.</strong> Ridge regression and one-hot encoding are tabular/labeling methods, whereas Grad-CAM visualizes spatial CNN attention heatmaps.`;
+        }
+        playAmbientTone(220, 0.3);
+      }
+    });
+  });
 }
 
 // Cash register synthesizer via Web Audio API

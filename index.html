@@ -539,6 +539,35 @@
                     </div>
                   </div>
                 </article>
+
+                <!-- Project 6: ExamBro -->
+                <article class="project-card scroll-reveal" id="proj-card-exambro">
+                  <div class="project-visual bg-grad-exambro">
+                    <div class="exambro-preview">
+                      <div class="exambro-badge">🎓 ExamBro AI Copilot</div>
+                      <div class="exambro-sub">Adaptive Question & Flashcard Engine</div>
+                    </div>
+                  </div>
+                  <div class="project-info">
+                    <div class="project-tags">
+                      <span class="tag">AI Copilot</span>
+                      <span class="tag">LLM Orchestration</span>
+                      <span class="tag">Quiz Generator</span>
+                      <span class="tag">Analytics</span>
+                    </div>
+                    <h3 class="project-name">ExamBro: AI Exam Prep & Study Copilot</h3>
+                    <p class="project-description">
+                      An intelligent AI exam preparation platform that ingests syllabus material and lecture notes to dynamically generate adaptive practice tests, smart flashcards, and topic weakness heatmaps.
+                    </p>
+                    <div class="project-stats-row">
+                      <div class="p-stat"><strong>Instant AI</strong> Question Generation</div>
+                      <div class="p-stat"><strong>Weakness Heatmaps</strong> & Analytics</div>
+                    </div>
+                    <div class="project-links">
+                      <button class="btn btn-sm btn-outline btn-dialog-trigger" data-dialog="dialog-exambro">Deep Dive & Demo</button>
+                    </div>
+                  </div>
+                </article>
               </div>
             </div>
           </section>
@@ -1258,6 +1287,55 @@
                 <button class="sound-chip-btn" data-sound="fire">🔥 Fire</button>
                 <button class="sound-chip-btn" data-sound="forest">🌲 Forest</button>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- Dialog 6: ExamBro -->
+  <dialog id="dialog-exambro" class="project-dialog">
+    <div class="dialog-content">
+      <button class="dialog-close-btn" aria-label="Close dialog" data-close="dialog-exambro">&times;</button>
+
+      <div class="dialog-body-layout">
+        <div class="dialog-info-section">
+          <h2>ExamBro: AI Exam Prep & Study Copilot</h2>
+          <div class="dialog-tags">
+            <span class="tag">AI Engine</span>
+            <span class="tag">LLM Orchestration</span>
+            <span class="tag">Smart Flashcards</span>
+            <span class="tag">Weakness Analytics</span>
+          </div>
+
+          <p>
+            An AI-driven study platform engineered to accelerate exam preparation by converting raw academic notes into targeted, interactive practice material.
+          </p>
+
+          <h3>Key Architectural Highlights</h3>
+          <ul>
+            <li><strong>Syllabus Note Ingestion</strong>: Automates parsing of PDF lecture slides and textbooks into structured topic nodes.</li>
+            <li><strong>Adaptive Quiz Generation</strong>: Leverages prompt engineering patterns to output multiple-choice and conceptual questions graded on difficulty.</li>
+            <li><strong>Topic Mastery Heatmap</strong>: Tracks user accuracy per sub-topic, highlighting high-yield focus areas ahead of exam dates.</li>
+            <li><strong>AI Explanations & Feedback</strong>: Provides immediate, step-by-step reasoning for wrong answers to reinforce active recall.</li>
+          </ul>
+        </div>
+
+        <div class="dialog-demo-section">
+          <h3>Interactive Demo: AI Exam Question Generator</h3>
+          <p class="text-sm text-dim">Select an answer below to test ExamBro's instant AI feedback loop.</p>
+
+          <div class="demo-widget-box exambro-widget">
+            <div class="exambro-question-card">
+              <span class="question-tag">Machine Learning • Question 1</span>
+              <p class="question-text">Which technique helps visualize feature importance and decision boundaries in deep convolutional neural networks?</p>
+
+              <div class="quiz-options-list">
+                <button class="quiz-option-btn" data-correct="false">A) Ridge Regression</button>
+                <button class="quiz-option-btn" data-correct="true">B) Grad-CAM Heatmaps</button>
+                <button class="quiz-option-btn" data-correct="false">C) One-Hot Encoding</button>
+              </div>
+
+              <div class="quiz-explanation-box" id="exambro-quiz-feedback" style="display: none;"></div>
             </div>
           </div>
         </div>

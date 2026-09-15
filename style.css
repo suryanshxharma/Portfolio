@@ -914,6 +914,120 @@ html[data-theme="light"] .moon-icon { display: block; }
               var(--color-bg-subtle);
 }
 
+.bg-grad-exambro {
+  background: radial-gradient(circle at 30% 20%, oklch(35% 0.18 290 / 35%), transparent),
+              radial-gradient(circle at 80% 80%, oklch(30% 0.14 40 / 30%), transparent),
+              var(--color-bg-subtle);
+}
+
+/* ExamBro Visual Preview Card */
+.exambro-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 16px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.exambro-badge {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+}
+
+.exambro-sub {
+  font-size: 0.75rem;
+  color: var(--color-text-subtle);
+}
+
+/* ExamBro Quiz Demo Widget */
+.exambro-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.exambro-question-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.question-tag {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.question-text {
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quiz-option-btn {
+  text-align: left;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-option-btn:hover {
+  border-color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.quiz-option-btn.correct-selected {
+  background: rgba(46, 204, 113, 0.2);
+  border-color: #2ecc71;
+  color: #2ecc71;
+}
+
+.quiz-option-btn.wrong-selected {
+  background: rgba(231, 76, 60, 0.2);
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+.quiz-explanation-box {
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.quiz-explanation-box.success {
+  background: rgba(46, 204, 113, 0.15);
+  border-left: 3px solid #2ecc71;
+  color: var(--color-text);
+}
+
+.quiz-explanation-box.error {
+  background: rgba(231, 76, 60, 0.15);
+  border-left: 3px solid #e74c3c;
+  color: var(--color-text);
+}
+
 /* Zen Study Timer Preview Card */
 .zen-timer-preview {
   display: flex;
