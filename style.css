@@ -2360,11 +2360,23 @@ html[data-theme="light"] .badge-emblem {
 }
 
 .gta-slide.slide-2 {
-  background-image: linear-gradient(to bottom, rgba(13, 2, 33, 0.65), rgba(13, 2, 33, 0.85)), url('pics/gta_slide_2.png');
+  background-image: linear-gradient(to bottom, rgba(13, 2, 33, 0.65), rgba(13, 2, 33, 0.85)), url('pics/gta_slide_2.jpg');
 }
 
 .gta-slide.slide-3 {
-  background-image: linear-gradient(to bottom, rgba(13, 2, 33, 0.65), rgba(13, 2, 33, 0.85)), url('pics/gta_slide_1.png');
+  background-image: linear-gradient(to bottom, rgba(13, 2, 33, 0.65), rgba(13, 2, 33, 0.85)), url('pics/gta_slide_3.jpg');
+}
+
+.gta-slide.slide-4 {
+  background-image: linear-gradient(to bottom, rgba(13, 2, 33, 0.65), rgba(13, 2, 33, 0.85)), url('pics/gta_slide_4.png');
+}
+
+.gta-slide.slide-5 {
+  background-image: linear-gradient(to bottom, rgba(13, 2, 33, 0.65), rgba(13, 2, 33, 0.85)), url('pics/gta_slide_5.png');
+}
+
+.gta-slide.slide-6 {
+  background-image: linear-gradient(to bottom, rgba(13, 2, 33, 0.65), rgba(13, 2, 33, 0.85)), url('pics/gta_slide_7.jpg');
 }
 
 .gta-slide.active {
