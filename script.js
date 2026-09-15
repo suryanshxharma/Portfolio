@@ -100,18 +100,19 @@ function initTerminal() {
     projects: () => `
       <p class="output-success">📂 Core Project Portfolios:</p>
       <p class="text-dim">--------------------------------------------------</p>
-      <p>1. <span class="cmd-text">crop-disease</span>  - ResNet-50 + ViT diagnostic system with Grad-CAM & LIME (97.91% validation accuracy).</p>
-      <p>2. <span class="cmd-text">stock-forecast</span> - Chronological sequential LSTM/GRU compare pipelines with zero leakage.</p>
-      <p>3. <span class="cmd-text">growth-agent</span>   - Social platform crawling multi-agent LLM scoring lead queue.</p>
-      <p>4. <span class="cmd-text">billflow-wa</span>    - Free Digital receipts UPI invoice redirect tool with background cash chimes.</p>
-      <p class="text-dim">Type any project name (e.g. <span class="cmd-text">billflow-wa</span>) to drill down directly.</p>
+      <p>1. <span class="cmd-text">crop-disease</span>   - ResNet-50 + ViT diagnostic system with Grad-CAM & LIME (97.91% validation accuracy).</p>
+      <p>2. <span class="cmd-text">stock-forecast</span>  - Chronological sequential LSTM/GRU compare pipelines with zero leakage.</p>
+      <p>3. <span class="cmd-text">growth-agent</span>    - Social platform crawling multi-agent LLM scoring lead queue.</p>
+      <p>4. <span class="cmd-text">billflow-wa</span>     - Free Digital receipts UPI invoice redirect tool with background cash chimes.</p>
+      <p>5. <span class="cmd-text">zen-study-timer</span> - Ambient study timer with React 19, Supabase sync & Razorpay Pro SaaS.</p>
+      <p class="text-dim">Type any project name (e.g. <span class="cmd-text">zen-study-timer</span>) to drill down directly.</p>
     `,
     skills: () => `
       <p class="output-success">🛠️ Technical Stack:</p>
       <p class="text-dim">--------------------------------------------------</p>
-      <p><strong class="cmd-text">Languages:</strong> Python, C++, JAVA, MATLAB, HTML, CSS</p>
+      <p><strong class="cmd-text">Languages:</strong> Python, C++, JAVA, MATLAB, HTML, CSS, JavaScript, React 19</p>
       <p><strong class="cmd-text">Libraries & ML:</strong> PyTorch, TensorFlow, Scikit-Learn, OpenCV, Hugging Face, Streamlit</p>
-      <p><strong class="cmd-text">Cloud & Tools:</strong> AWS Certified Cloud Practitioner, Git, Vercel, PlantUML, Dialogflow NLP</p>
+      <p><strong class="cmd-text">Cloud & Tools:</strong> AWS Certified Cloud Practitioner, Supabase, Razorpay API, Git, Vercel</p>
     `,
     football: () => `
       <p class="output-success">⚽ Varsity Football Captaincy:</p>
@@ -145,6 +146,11 @@ function initTerminal() {
       <p>⚡ BillFlow WA: WhatsApp Billing SaaS:</p>
       <p>Digital invoice dispatch using free redirection hooks instead of premium API routes.</p>
       <p>Synthesizes checkout audio alerts on dashboard using Web Audio API.</p>
+    `,
+    'zen-study-timer': () => `
+      <p>🧘 Zen Study Timer & Focus Suite:</p>
+      <p>React 19 + Vite ambient productivity dashboard with multi-track soundscape audio synth.</p>
+      <p>Supabase Cloud user sync & Razorpay Pro subscription payments with webhook verification.</p>
     `
   };
 
@@ -418,6 +424,87 @@ function initDemos() {
       const volumeLevel = volSlider ? parseFloat(volSlider.value) / 100 : 0.6;
       playCashChime(volumeLevel);
     });
+  }
+
+  /* --- 5. Zen Study Timer Demo Widget --- */
+  initZenTimerDemo();
+}
+
+function initZenTimerDemo() {
+  const toggleBtn = document.getElementById('btn-zen-timer-toggle');
+  const display = document.getElementById('zen-demo-time-display');
+  const cardDisplay = document.getElementById('card-timer-display');
+  const soundBtns = document.querySelectorAll('.sound-chip-btn');
+
+  let seconds = 25 * 60;
+  let timerInterval = null;
+  let isRunning = false;
+
+  const updateDisplay = () => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    if (display) display.textContent = formatted;
+    if (cardDisplay) cardDisplay.textContent = formatted;
+  };
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      if (isRunning) {
+        clearInterval(timerInterval);
+        isRunning = false;
+        toggleBtn.textContent = '▶ Resume Focus Session';
+      } else {
+        isRunning = true;
+        toggleBtn.textContent = '⏸ Pause Session';
+        timerInterval = setInterval(() => {
+          if (seconds > 0) {
+            seconds--;
+            updateDisplay();
+          } else {
+            clearInterval(timerInterval);
+            isRunning = false;
+            toggleBtn.textContent = '▶ Start Focus Session';
+            seconds = 25 * 60;
+            updateDisplay();
+            playAmbientTone(528, 0.4); // Solfeggio 528Hz bell chime on completion
+          }
+        }, 1000);
+      }
+    });
+  }
+
+  // Audio Soundscape Synthesizer
+  soundBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isActive = btn.classList.toggle('active');
+      const soundType = btn.getAttribute('data-sound');
+      if (isActive) {
+        const freqs = { rain: 220, cafe: 330, fire: 440, forest: 550 };
+        playAmbientTone(freqs[soundType] || 440, 0.2);
+      }
+    });
+  });
+}
+
+function playAmbientTone(freq, volume) {
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    const ctx = new AudioContextClass();
+    if (ctx.state === 'suspended') ctx.resume();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, ctx.currentTime);
+    gain.gain.setValueAtTime(volume, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.8);
+  } catch (err) {
+    console.error('Ambient Audio synth failed:', err);
   }
 }
 
