@@ -240,14 +240,7 @@ function initProjectDialogs() {
   const dialogs = document.querySelectorAll('.project-dialog');
   dialogs.forEach(dialog => {
     dialog.addEventListener('click', (e) => {
-      const rect = dialog.getBoundingClientRect();
-      const isInDialog = (
-        rect.top <= e.clientY &&
-        e.clientY <= rect.top + rect.height &&
-        rect.left <= e.clientX &&
-        e.clientX <= rect.left + rect.width
-      );
-      if (!isInDialog) {
+      if (e.target === dialog) {
         dialog.close();
       }
     });
