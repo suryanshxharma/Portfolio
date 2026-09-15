@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initDemos();
   initScrollFallback();
   initContactForm();
+  initGTALoadingScreen();
+  initGTAWantedHUD();
+  initGTARadioStation();
 });
 
 /* ==========================================================================
@@ -87,6 +90,7 @@ function initTerminal() {
       <p>  <span class="cmd-text">about</span>      - Personal summary and background</p>
       <p>  <span class="cmd-text">projects</span>   - Core project portfolio overview</p>
       <p>  <span class="cmd-text">skills</span>     - Technical capabilities checklist</p>
+      <p>  <span class="cmd-text">wanted</span>     - Check current Vice City 6-Star Reputation level</p>
       <p>  <span class="cmd-text">football</span>   - Varsity football coordination & tactical vision</p>
       <p>  <span class="cmd-text">clear</span>      - Clear terminal console screen</p>
     `,
@@ -157,7 +161,16 @@ function initTerminal() {
       <p>🎓 ExamBro: AI Exam Prep & Study Copilot:</p>
       <p>Converts lecture notes & syllabus slides into adaptive practice quizzes and flashcard decks.</p>
       <p>Generates real-time topic weakness heatmaps and step-by-step AI answer explanations.</p>
-    `
+    `,
+    'wanted': () => {
+      addReputationStar();
+      return `
+        <p class="output-success">⭐ VICE CITY REPUTATION STATUS:</p>
+        <p class="text-dim">--------------------------------------------------</p>
+        <p>Current Wanted Level: <strong style="color: #ffcc00;">${currentWantedStars} / 6 STARS</strong></p>
+        <p>Keep exploring projects, running demos, and submitting contact forms to reach MAX REPUTATION!</p>
+      `;
+    }
   };
 
   const handleCommand = (cmdText) => {
@@ -220,6 +233,9 @@ function initProjectDialogs() {
       const dialog = document.getElementById(dialogId);
       if (dialog) {
         dialog.showModal();
+        addReputationStar();
+        const projTitle = dialog.querySelector('h2') ? dialog.querySelector('h2').textContent : 'PROJECT DISCOVERED';
+        triggerGTAMissionPassed(projTitle, '+$100,000 RESPECT');
       }
     });
   });
@@ -706,6 +722,8 @@ function initContactForm() {
     setTimeout(() => {
       // Success toast trigger
       alert(`Thank you, ${fields.name.el.value}! Your message has been sent successfully.`);
+      addReputationStar();
+      triggerGTAMissionPassed('CONTACT INITIATED!', '+$250,000 RESPECT');
       
       // Reset form
       form.reset();
@@ -715,4 +733,204 @@ function initContactForm() {
       }
     }, 1500);
   });
+}
+
+/* ==========================================================================
+   GTA VICE CITY THEME INTERACTIVE LOGIC & SYNTHESIZERS
+   ========================================================================== */
+
+let currentWantedStars = 1;
+let currentStationIndex = 0;
+const radioStations = [
+  { name: 'FLASH FM', freq: 440 },
+  { name: 'WAVE 103', freq: 520 },
+  { name: 'V-ROCK', freq: 660 },
+  { name: 'LO-FI CHILL', freq: 330 }
+];
+
+function initGTALoadingScreen() {
+  const loadingScreen = document.getElementById('gta-loading-screen');
+  const fill = document.getElementById('gta-loading-fill');
+  const pctText = document.getElementById('gta-loading-pct');
+  const enterBtn = document.getElementById('gta-enter-btn');
+  const slides = document.querySelectorAll('.gta-slide');
+
+  if (!loadingScreen || !fill || !pctText || !enterBtn) return;
+
+  // Slide rotator
+  let currentSlide = 0;
+  const slideInterval = setInterval(() => {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }, 2500);
+
+  // Loading bar simulation
+  let pct = 0;
+  const loadInterval = setInterval(() => {
+    pct += Math.floor(Math.random() * 15) + 5;
+    if (pct >= 100) {
+      pct = 100;
+      clearInterval(loadInterval);
+      fill.style.width = '100%';
+      pctText.textContent = '100%';
+      pctText.style.color = '#ff007f';
+      enterBtn.style.display = 'inline-block';
+      playGTALoadedChime();
+    } else {
+      fill.style.width = `${pct}%`;
+      pctText.textContent = `${pct}%`;
+    }
+  }, 120);
+
+  const dismissLoading = () => {
+    clearInterval(slideInterval);
+    loadingScreen.classList.add('hidden');
+    playGTASynthArp(440, 880);
+    setTimeout(() => {
+      triggerGTAMissionPassed('WELCOME TO VICE CITY', 'WELCOME TO SURYANSH SHARMA PORTFOLIO');
+    }, 800);
+  };
+
+  enterBtn.addEventListener('click', dismissLoading);
+  document.addEventListener('keydown', (e) => {
+    if (!loadingScreen.classList.contains('hidden') && pct >= 100) {
+      dismissLoading();
+    }
+  });
+}
+
+function initGTAWantedHUD() {
+  updateWantedStarsUI();
+}
+
+function addReputationStar() {
+  if (currentWantedStars < 6) {
+    currentWantedStars++;
+    updateWantedStarsUI();
+    playGTASynthArp(500, 750);
+    if (currentWantedStars === 6) {
+      triggerGTAMissionPassed('MAX REPUTATION REACHED! ⭐⭐⭐⭐⭐⭐', '6-STAR MASTER ARCHITECT');
+    }
+  }
+}
+
+function updateWantedStarsUI() {
+  const stars = document.querySelectorAll('.gta-star');
+  stars.forEach((star, idx) => {
+    if (idx < currentWantedStars) {
+      star.classList.add('active');
+    } else {
+      star.classList.remove('active');
+    }
+  });
+}
+
+function initGTARadioStation() {
+  const radioBtn = document.getElementById('gta-radio-toggle');
+  const stationName = document.getElementById('gta-station-name');
+
+  if (!radioBtn || !stationName) return;
+
+  radioBtn.addEventListener('click', () => {
+    currentStationIndex = (currentStationIndex + 1) % radioStations.length;
+    const st = radioStations[currentStationIndex];
+    stationName.textContent = st.name;
+    radioBtn.classList.add('playing');
+    playGTASynthArp(st.freq, st.freq * 1.5);
+
+    setTimeout(() => {
+      radioBtn.classList.remove('playing');
+    }, 1500);
+  });
+}
+
+function triggerGTAMissionPassed(title, reward) {
+  const overlay = document.getElementById('gta-mission-passed');
+  const nameEl = document.getElementById('gta-mission-name');
+
+  if (!overlay || !nameEl) return;
+
+  nameEl.textContent = title || 'PROJECT DISCOVERED';
+  overlay.classList.add('show');
+  playGTAMissionPassedChime();
+
+  setTimeout(() => {
+    overlay.classList.remove('show');
+  }, 3500);
+}
+
+// Web Audio API Synthesizers for Vice City 80s Soundscapes
+function playGTALoadedChime() {
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    const ctx = new AudioContextClass();
+    if (ctx.state === 'suspended') ctx.resume();
+
+    const freqs = [440, 554.37, 659.25, 880];
+    freqs.forEach((f, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(f, ctx.currentTime + i * 0.1);
+      gain.gain.setValueAtTime(0.2, ctx.currentTime + i * 0.1);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.1 + 0.4);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + i * 0.1);
+      osc.stop(ctx.currentTime + i * 0.1 + 0.5);
+    });
+  } catch (e) {
+    console.error('Vice City audio synth error:', e);
+  }
+}
+
+function playGTASynthArp(startFreq, endFreq) {
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    const ctx = new AudioContextClass();
+    if (ctx.state === 'suspended') ctx.resume();
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(startFreq, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(endFreq, ctx.currentTime + 0.2);
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.3);
+  } catch (e) {
+    console.error('Vice City synth arp error:', e);
+  }
+}
+
+function playGTAMissionPassedChime() {
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    const ctx = new AudioContextClass();
+    if (ctx.state === 'suspended') ctx.resume();
+
+    // Classic Vice City fanfare arpeggio synth
+    const notes = [523.25, 659.25, 783.99, 1046.50]; // C - E - G - High C
+    notes.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.12);
+      gain.gain.setValueAtTime(0.3, ctx.currentTime + idx * 0.12);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.12 + 0.6);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + idx * 0.12);
+      osc.stop(ctx.currentTime + idx * 0.12 + 0.7);
+    });
+  } catch (e) {
+    console.error('Vice City Mission Passed chime error:', e);
+  }
 }

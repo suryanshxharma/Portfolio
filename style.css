@@ -2282,3 +2282,327 @@ html[data-theme="light"] .badge-emblem {
   text-wrap: pretty;
 }
 
+/* ==========================================================================
+   GTA VICE CITY THEME & HUD STYLES
+   ========================================================================== */
+
+:root {
+  --gta-pink: #ff007f;
+  --gta-cyan: #00f0ff;
+  --gta-yellow: #ffcc00;
+  --gta-purple: #7928ca;
+  --gta-dark: #090214;
+}
+
+/* Vice City Logo & Headers Accent */
+.logo-accent {
+  color: var(--gta-pink);
+  text-shadow: 0 0 10px var(--gta-pink);
+}
+
+/* GTA Loading Screen Overlay */
+.gta-loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: radial-gradient(circle at 50% 30%, #2d0b4e 0%, var(--gta-dark) 80%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  color: #fff;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+  overflow: hidden;
+}
+
+.gta-loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.gta-palm-silhouettes {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 50% 100%, rgba(255, 0, 127, 0.25), transparent 70%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.gta-loading-bg-slides {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gta-slide {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.96) translateY(10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  text-align: center;
+  pointer-events: none;
+}
+
+.gta-slide.active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.gta-city-tag {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  color: var(--gta-cyan);
+  text-shadow: 0 0 8px var(--gta-cyan);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.gta-slide-title {
+  font-family: 'Permanent Marker', 'Outfit', sans-serif;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, var(--gta-yellow) 0%, #ff5e00 50%, var(--gta-pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 12px rgba(255, 0, 127, 0.4));
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.gta-slide-sub {
+  font-family: var(--font-mono);
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 1px;
+}
+
+.gta-loading-footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.gta-loading-bar-container {
+  height: 14px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid var(--gta-pink);
+  border-radius: 999px;
+  padding: 2px;
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+  overflow: hidden;
+}
+
+.gta-loading-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gta-cyan), var(--gta-pink), var(--gta-yellow));
+  border-radius: 999px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px var(--gta-cyan);
+}
+
+.gta-loading-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.gta-loading-tip {
+  color: var(--color-text-subtle);
+}
+
+.gta-loading-pct {
+  color: var(--gta-yellow);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.gta-enter-btn {
+  background: linear-gradient(135deg, var(--gta-pink), var(--gta-purple));
+  border: none;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(255, 0, 127, 0.6);
+  transition: all 0.2s ease;
+  animation: pulse-gta-btn 1.5s infinite;
+}
+
+.gta-enter-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.8);
+}
+
+@keyframes pulse-gta-btn {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* Vice City 6-Star Wanted Meter HUD */
+.gta-wanted-meter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(13, 2, 33, 0.7);
+  border: 1px solid rgba(255, 0, 127, 0.3);
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.wanted-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--gta-cyan);
+  letter-spacing: 1px;
+}
+
+.wanted-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.gta-star {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.gta-star.active {
+  color: var(--gta-yellow);
+  text-shadow: 0 0 8px var(--gta-yellow), 0 0 15px #ff5e00;
+  animation: star-glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes star-glow {
+  from { transform: scale(1); }
+  to { transform: scale(1.15); }
+}
+
+/* Vice City Radio Station Player Widget */
+.gta-radio-widget {
+  display: flex;
+  align-items: center;
+}
+
+.gta-radio-btn {
+  background: rgba(13, 2, 33, 0.8);
+  border: 1px solid var(--gta-pink);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gta-radio-btn:hover {
+  background: var(--gta-pink);
+  box-shadow: 0 0 12px var(--gta-pink);
+}
+
+.radio-station-name {
+  font-weight: 700;
+  color: var(--gta-yellow);
+  letter-spacing: 0.5px;
+}
+
+.radio-equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 10px;
+}
+
+.radio-equalizer span {
+  width: 2px;
+  height: 3px;
+  background: var(--gta-cyan);
+  border-radius: 1px;
+  transition: height 0.2s ease;
+}
+
+.gta-radio-btn.playing .radio-equalizer span:nth-child(1) { animation: eq-bar 0.4s infinite alternate; }
+.gta-radio-btn.playing .radio-equalizer span:nth-child(2) { animation: eq-bar 0.6s infinite alternate 0.1s; }
+.gta-radio-btn.playing .radio-equalizer span:nth-child(3) { animation: eq-bar 0.5s infinite alternate 0.2s; }
+
+@keyframes eq-bar {
+  0% { height: 2px; }
+  100% { height: 10px; }
+}
+
+/* GTA Mission Passed Toast Overlay */
+.gta-mission-passed-overlay {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50px);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gta-mission-passed-overlay.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.gta-mission-passed-banner {
+  background: #000;
+  border-top: 4px solid var(--gta-yellow);
+  border-bottom: 4px solid var(--gta-yellow);
+  padding: 16px 40px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 204, 0, 0.4);
+}
+
+.mission-title {
+  font-family: 'Permanent Marker', 'Outfit', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--gta-yellow);
+  text-shadow: 3px 3px 0px #000, 0 0 15px var(--gta-yellow);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+.mission-sub {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: #fff;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.mission-rewards {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #2ecc71;
+}
+
