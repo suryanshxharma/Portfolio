@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGTAWantedHUD();
   initGTARadioStation();
   initGTAScrollBackground();
+  initGTACursor();
 });
 
 /* ==========================================================================
@@ -956,8 +957,14 @@ function initGTAScrollBackground() {
     'contact': 'contact'
   };
 
+  let activeSectionId = '';
+
   const switchSectionBg = (sectionId) => {
+    if (!sectionId || sectionId === activeSectionId) return;
+    activeSectionId = sectionId;
+
     const targetBgKey = sectionToBgMap[sectionId] || 'hero';
+
     slides.forEach(slide => {
       if (slide.dataset.bgSection === targetBgKey) {
         slide.classList.add('active');
@@ -975,27 +982,104 @@ function initGTAScrollBackground() {
     });
   };
 
-  const observerOptions = {
-    root: null,
-    rootMargin: '-20% 0px -40% 0px',
-    threshold: 0.2
-  };
+  // Robust scroll position calculation
+  const checkActiveSectionOnScroll = () => {
+    const viewportCenter = window.innerHeight * 0.4;
+    let closestSection = null;
+    let minDistance = Infinity;
 
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        switchSectionBg(id);
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= viewportCenter && rect.bottom >= viewportCenter) {
+        closestSection = section;
+        minDistance = -1;
+      } else if (minDistance !== -1) {
+        const distance = Math.abs(rect.top - viewportCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestSection = section;
+        }
       }
     });
-  }, observerOptions);
 
-  sections.forEach(section => sectionObserver.observe(section));
+    if (closestSection) {
+      const id = closestSection.getAttribute('id');
+      if (id) switchSectionBg(id);
+    }
+  };
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        checkActiveSectionOnScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Initial check on load
+  checkActiveSectionOnScroll();
 
   navLinks.forEach(link => {
     link.addEventListener('mouseenter', () => {
       playGTAMenuClickSound();
     });
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href')?.replace('#', '');
+      if (targetId) {
+        switchSectionBg(targetId);
+      }
+    });
+  });
+}
+
+/* ==========================================================================
+   GTA VICE CITY DYNAMIC NEON RETICLE CURSOR SYSTEM
+   ========================================================================== */
+function initGTACursor() {
+  const cursor = document.getElementById('gta-custom-cursor');
+  if (!cursor || window.matchMedia('(max-width: 768px)').matches) return;
+
+  let mouseX = -100;
+  let mouseY = -100;
+  let cursorX = -100;
+  let cursorY = -100;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  }, { passive: true });
+
+  const animateCursor = () => {
+    cursorX += (mouseX - cursorX) * 0.35;
+    cursorY += (mouseY - cursorY) * 0.35;
+    cursor.style.transform = `translate3d(${cursorX - 11}px, ${cursorY - 11}px, 0)`;
+    requestAnimationFrame(animateCursor);
+  };
+  animateCursor();
+
+  const interactiveSelectors = 'a, button, input, textarea, select, .project-card, .stat-card, .highlight-card, .leadership-card, .skill-item, .terminal-btn-cmd, .gta-radio-btn, .btn-dialog-trigger';
+  
+  document.body.addEventListener('mouseover', (e) => {
+    if (e.target.closest(interactiveSelectors)) {
+      cursor.classList.add('hovering');
+    }
+  });
+
+  document.body.addEventListener('mouseout', (e) => {
+    if (e.target.closest(interactiveSelectors)) {
+      cursor.classList.remove('hovering');
+    }
+  });
+
+  document.body.addEventListener('mousedown', () => {
+    cursor.classList.add('clicking');
+  });
+
+  document.body.addEventListener('mouseup', () => {
+    cursor.classList.remove('clicking');
   });
 }
 
