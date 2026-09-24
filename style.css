@@ -2789,6 +2789,21 @@ a, button, [role="button"], .nav-link, .project-card, .btn, .terminal-btn-cmd, .
   border-color: var(--gta-cyan, #00f0ff);
 }
 
+#gta-custom-cursor.firing {
+  width: 46px !important;
+  height: 46px !important;
+  border-color: #ffffff !important;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 204, 0, 0.8) 40%, rgba(255, 0, 127, 0.5) 70%, transparent 90%) !important;
+  box-shadow: 0 0 30px #ffffff, 0 0 50px #ffcc00, 0 0 80px #ff007f !important;
+  animation: muzzle-spark 0.15s ease-out forwards;
+}
+
+@keyframes muzzle-spark {
+  0% { transform: scale(1.6) rotate(0deg); opacity: 1; }
+  50% { transform: scale(2.2) rotate(20deg); opacity: 0.9; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
 @keyframes gta-cursor-pulse {
   0% { transform: scale(1) rotate(0deg); }
   100% { transform: scale(1.15) rotate(45deg); }

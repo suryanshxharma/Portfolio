@@ -1076,11 +1076,74 @@ function initGTACursor() {
 
   document.body.addEventListener('mousedown', () => {
     cursor.classList.add('clicking');
+    cursor.classList.add('firing');
+    playGTAGunfireSound();
+    setTimeout(() => {
+      cursor.classList.remove('firing');
+    }, 150);
   });
 
   document.body.addEventListener('mouseup', () => {
     cursor.classList.remove('clicking');
   });
+}
+
+/* Synthesizes GTA Arcade Pistol Gunshot Audio using Web Audio API */
+function playGTAGunfireSound() {
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    const ctx = new AudioContextClass();
+    if (ctx.state === 'suspended') ctx.resume();
+
+    const t = ctx.currentTime;
+
+    // 1. Heavy Low Frequency Impact Punch (Sawtooth 190Hz -> 30Hz drop)
+    const osc = ctx.createOscillator();
+    const oscGain = ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(190, t);
+    osc.frequency.exponentialRampToValueAtTime(30, t + 0.08);
+
+    oscGain.gain.setValueAtTime(0.35, t);
+    oscGain.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+
+    osc.connect(oscGain);
+    oscGain.connect(ctx.destination);
+    osc.start(t);
+    osc.stop(t + 0.12);
+
+    // 2. High Frequency Transient Crack + Echo Tail (Noise Buffer + Bandpass Filter)
+    const bufferSize = Math.floor(ctx.sampleRate * 0.22);
+    const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const output = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      output[i] = Math.random() * 2 - 1;
+    }
+
+    const whiteNoise = ctx.createBufferSource();
+    whiteNoise.buffer = noiseBuffer;
+
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(1300, t);
+    filter.frequency.exponentialRampToValueAtTime(220, t + 0.18);
+    filter.Q.value = 1.4;
+
+    const noiseGain = ctx.createGain();
+    noiseGain.gain.setValueAtTime(0.38, t);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+
+    whiteNoise.connect(filter);
+    filter.connect(noiseGain);
+    noiseGain.connect(ctx.destination);
+
+    whiteNoise.start(t);
+    whiteNoise.stop(t + 0.2);
+
+  } catch (e) {
+    // silent fallback
+  }
 }
 
 function playGTAMenuClickSound() {
