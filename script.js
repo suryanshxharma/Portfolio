@@ -1042,20 +1042,37 @@ function initGTACursor() {
   const cursor = document.getElementById('gta-custom-cursor');
   if (!cursor || window.matchMedia('(max-width: 768px)').matches) return;
 
-  let mouseX = -100;
-  let mouseY = -100;
-  let cursorX = -100;
-  let cursorY = -100;
+  let mouseX = -1000;
+  let mouseY = -1000;
+  let cursorX = -1000;
+  let cursorY = -1000;
+  let isInitialized = false;
 
   window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
+    if (!isInitialized) {
+      cursorX = mouseX;
+      cursorY = mouseY;
+      isInitialized = true;
+      cursor.classList.add('active');
+    }
   }, { passive: true });
 
+  document.addEventListener('mouseleave', () => {
+    cursor.classList.remove('active');
+  });
+
+  document.addEventListener('mouseenter', () => {
+    if (isInitialized) cursor.classList.add('active');
+  });
+
   const animateCursor = () => {
-    cursorX += (mouseX - cursorX) * 0.35;
-    cursorY += (mouseY - cursorY) * 0.35;
-    cursor.style.transform = `translate3d(${cursorX - 11}px, ${cursorY - 11}px, 0)`;
+    if (isInitialized) {
+      cursorX += (mouseX - cursorX) * 0.35;
+      cursorY += (mouseY - cursorY) * 0.35;
+      cursor.style.transform = `translate3d(${cursorX - 11}px, ${cursorY - 11}px, 0)`;
+    }
     requestAnimationFrame(animateCursor);
   };
   animateCursor();
