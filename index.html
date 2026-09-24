@@ -195,6 +195,19 @@
   <div class="glow-orb orb-2" aria-hidden="true"></div>
   <div class="glow-orb orb-3" aria-hidden="true"></div>
 
+  <!-- GTA Scroll Background Artwork Cross-Fader -->
+  <div id="gta-scroll-bg" class="gta-scroll-bg-container" aria-hidden="true">
+    <div class="gta-scroll-slide slide-hero active" style="background-image: url('pics/gta_slide_1.png');" data-bg-section="hero"></div>
+    <div class="gta-scroll-slide slide-about" style="background-image: url('pics/gta_slide_2.jpg');" data-bg-section="about"></div>
+    <div class="gta-scroll-slide slide-experience" style="background-image: url('pics/gta_slide_3.jpg');" data-bg-section="experience"></div>
+    <div class="gta-scroll-slide slide-terminal" style="background-image: url('pics/gta_slide_4.png');" data-bg-section="terminal"></div>
+    <div class="gta-scroll-slide slide-projects" style="background-image: url('pics/gta_slide_5.png');" data-bg-section="projects"></div>
+    <div class="gta-scroll-slide slide-skills" style="background-image: url('pics/gta_slide_1.png');" data-bg-section="skills"></div>
+    <div class="gta-scroll-slide slide-leadership" style="background-image: url('pics/gta_slide_7.jpg');" data-bg-section="leadership"></div>
+    <div class="gta-scroll-slide slide-contact" style="background-image: url('pics/gta_slide_7.jpg');" data-bg-section="contact"></div>
+    <div class="gta-scroll-overlay"></div>
+  </div>
+
   <!-- Header Navigation -->
   <header class="header" id="main-header">
     <div class="nav-container">
@@ -203,13 +216,13 @@
       </a>
 
       <nav class="nav-links" id="nav-menu" aria-label="Main Navigation">
-        <a href="#about" class="nav-link">About</a>
-        <a href="#experience" class="nav-link">Experience</a>
-        <a href="#terminal" class="nav-link">Terminal</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#leadership" class="nav-link">Leadership</a>
-        <a href="#contact" class="nav-link btn-contact-nav">Contact</a>
+        <a href="#about" class="nav-link" data-section="about"><span class="nav-link-badge">01</span> About</a>
+        <a href="#experience" class="nav-link" data-section="experience"><span class="nav-link-badge">02</span> Experience</a>
+        <a href="#terminal" class="nav-link" data-section="terminal"><span class="nav-link-badge">03</span> Terminal</a>
+        <a href="#projects" class="nav-link" data-section="projects"><span class="nav-link-badge">04</span> Projects</a>
+        <a href="#skills" class="nav-link" data-section="skills"><span class="nav-link-badge">05</span> Skills</a>
+        <a href="#leadership" class="nav-link" data-section="leadership"><span class="nav-link-badge">06</span> Leadership</a>
+        <a href="#contact" class="nav-link btn-contact-nav" data-section="contact"><span class="nav-link-badge">07</span> Contact</a>
       </nav>
 
       <div class="nav-controls">
@@ -311,7 +324,10 @@
     <!-- About Section -->
     <section class="about-section" id="about">
       <div class="section-container">
-        <h2 class="section-title scroll-reveal">About Me</h2>
+        <div class="gta-section-header scroll-reveal">
+          <span class="gta-section-badge">// TAB 01 • STATS & DOSSIER</span>
+          <h2 class="section-title">About Me</h2>
+        </div>
         <div class="about-grid">
           <div class="about-text scroll-reveal">
             <p>
@@ -367,9 +383,12 @@
     <!-- Experience Section -->
     <section class="experience-section" id="experience">
       <div class="section-container">
-        <h2 class="section-title scroll-reveal">Work Experience</h2>
-        <p class="section-subtitle scroll-reveal">A timeline of my professional roles delivering production-grade
-          software and automation pipelines.</p>
+        <div class="gta-section-header scroll-reveal">
+          <span class="gta-section-badge">// TAB 02 • BRIEFING & TIMELINE</span>
+          <h2 class="section-title">Work Experience</h2>
+          <p class="section-subtitle">A timeline of my professional roles delivering production-grade
+            software and automation pipelines.</p>
+        </div>
 
         <div class="experience-timeline-container">
           <!-- Experience Item 1 -->
@@ -396,61 +415,66 @@
                 metrics.</li>
             </ul>
           </div>
+        </div>
+      </div>
+    </section>
 
-          <!-- Terminal Section -->
-          <section class="terminal-section" id="terminal">
-            <div class="section-container">
-              <div class="terminal-header-area">
-                <h2 class="section-title scroll-reveal">Interactive Terminal CLI</h2>
-                <p class="section-subtitle scroll-reveal">Query my experience directly via standard shell commands or
-                  select a
-                  quick shortcut.</p>
-              </div>
+    <!-- Terminal Section -->
+    <section class="terminal-section" id="terminal">
+      <div class="section-container">
+        <div class="gta-section-header scroll-reveal">
+          <span class="gta-section-badge">// TAB 03 • MAINFRAME & CLI</span>
+          <h2 class="section-title">Interactive Terminal CLI</h2>
+          <p class="section-subtitle">Query my experience directly via standard shell commands or
+            select a quick shortcut.</p>
+        </div>
 
-              <div class="terminal-container scroll-reveal">
-                <div class="terminal-bar">
-                  <div class="terminal-dots">
-                    <span class="dot close"></span>
-                    <span class="dot minimize"></span>
-                    <span class="dot expand"></span>
-                  </div>
-                  <div class="terminal-title">suryansh@developer-node:~</div>
-                  <div class="terminal-status">Online</div>
-                </div>
-
-                <div class="terminal-window" id="terminal-body">
-                  <div class="terminal-output">
-                    <p class="text-dim">Suryansh Sharma Developer Node OS v1.0.0 (x86_64-apple-darwin)</p>
-                    <p class="text-dim">Type <span class="cmd-text">help</span> to view all available commands or choose
-                      a
-                      query below.</p>
-                    <p>&nbsp;</p>
-                    <div id="terminal-history"></div>
-                  </div>
-                  <div class="terminal-prompt-line">
-                    <span class="prompt-symbol">suryansh@juit:~$</span>
-                    <input type="text" id="terminal-input" autocomplete="off" spellcheck="false"
-                      aria-label="Terminal input line" placeholder="...">
-                  </div>
-                </div>
-
-                <div class="terminal-shortcuts">
-                  <button class="terminal-btn-cmd" data-cmd="about">about</button>
-                  <button class="terminal-btn-cmd" data-cmd="projects">projects</button>
-                  <button class="terminal-btn-cmd" data-cmd="skills">skills</button>
-                  <button class="terminal-btn-cmd" data-cmd="football">football</button>
-                  <button class="terminal-btn-cmd" data-cmd="clear">clear</button>
-                </div>
-              </div>
+        <div class="terminal-container scroll-reveal">
+          <div class="terminal-bar">
+            <div class="terminal-dots">
+              <span class="dot close"></span>
+              <span class="dot minimize"></span>
+              <span class="dot expand"></span>
             </div>
-          </section>
+            <div class="terminal-title">suryansh@developer-node:~</div>
+            <div class="terminal-status">Online</div>
+          </div>
 
-          <!-- Projects Grid Section -->
-          <section class="projects-section" id="projects">
-            <div class="section-container">
-              <h2 class="section-title scroll-reveal">Core Project Portfolios</h2>
-              <p class="section-subtitle scroll-reveal">Explore a curated selection of systems spanning computer vision,
-                quantitative modeling, autonomous agents, and SaaS utility dashboards.</p>
+          <div class="terminal-window" id="terminal-body">
+            <div class="terminal-output">
+              <p class="text-dim">Suryansh Sharma Developer Node OS v1.0.0 (x86_64-apple-darwin)</p>
+              <p class="text-dim">Type <span class="cmd-text">help</span> to view all available commands or choose
+                a query below.</p>
+              <p>&nbsp;</p>
+              <div id="terminal-history"></div>
+            </div>
+            <div class="terminal-prompt-line">
+              <span class="prompt-symbol">suryansh@juit:~$</span>
+              <input type="text" id="terminal-input" autocomplete="off" spellcheck="false"
+                aria-label="Terminal input line" placeholder="...">
+            </div>
+          </div>
+
+          <div class="terminal-shortcuts">
+            <button class="terminal-btn-cmd" data-cmd="about">about</button>
+            <button class="terminal-btn-cmd" data-cmd="projects">projects</button>
+            <button class="terminal-btn-cmd" data-cmd="skills">skills</button>
+            <button class="terminal-btn-cmd" data-cmd="football">football</button>
+            <button class="terminal-btn-cmd" data-cmd="clear">clear</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Grid Section -->
+    <section class="projects-section" id="projects">
+      <div class="section-container">
+        <div class="gta-section-header scroll-reveal">
+          <span class="gta-section-badge">// TAB 04 • MISSIONS & PORTFOLIO</span>
+          <h2 class="section-title">Core Project Portfolios</h2>
+          <p class="section-subtitle">Explore a curated selection of systems spanning computer vision,
+            quantitative modeling, autonomous agents, and SaaS utility dashboards.</p>
+        </div>
 
               <div class="projects-grid">
                 <!-- Project 1: Crop Disease -->
@@ -706,14 +730,16 @@
             </div>
           </section>
 
-          <!-- Skills Section -->
-          <section class="skills-section" id="skills">
-            <div class="section-container">
-              <h2 class="section-title scroll-reveal">Technical Capabilities</h2>
-              <p class="section-subtitle scroll-reveal">A comprehensive mapping of my tools, languages, and technical
-                frameworks.</p>
+    <!-- Skills Section -->
+    <section class="skills-section" id="skills">
+      <div class="section-container">
+        <div class="gta-section-header scroll-reveal">
+          <span class="gta-section-badge">// TAB 05 • ARMORY & SKILLS</span>
+          <h2 class="section-title">Technical Capabilities</h2>
+          <p class="section-subtitle">A comprehensive mapping of my tools, languages, and technical frameworks.</p>
+        </div>
 
-              <div class="skills-grid">
+        <div class="skills-grid">
                 <!-- Category 1 -->
                 <div class="skill-category scroll-reveal">
                   <h3>Languages</h3>
@@ -846,15 +872,16 @@
             </div>
           </section>
 
-          <!-- Leadership Section -->
-          <section class="leadership-section" id="leadership">
-            <div class="section-container">
-              <h2 class="section-title scroll-reveal">Leadership & Campus Engagement</h2>
-              <p class="section-subtitle scroll-reveal">Translating technical coordination and execution to team
-                strategies,
-                operations, and community service.</p>
+    <!-- Leadership Section -->
+    <section class="leadership-section" id="leadership">
+      <div class="section-container">
+        <div class="gta-section-header scroll-reveal">
+          <span class="gta-section-badge">// TAB 06 • CREW & LEADERSHIP</span>
+          <h2 class="section-title">Leadership & Campus Engagement</h2>
+          <p class="section-subtitle">Translating technical coordination and execution to team strategies, operations, and community service.</p>
+        </div>
 
-              <div class="leadership-cards">
+        <div class="leadership-cards">
                 <!-- Football Captain -->
                 <div class="leadership-card scroll-reveal">
                   <div class="l-card-header">
@@ -941,13 +968,14 @@
             </div>
           </section>
 
-          <!-- Contact Section -->
-          <section class="contact-section" id="contact">
-            <div class="section-container">
-              <h2 class="section-title scroll-reveal">Let's Connect</h2>
-              <p class="section-subtitle scroll-reveal">Whether you want to discuss AI integrations, custom automation,
-                or a
-                project collaboration, feel free to drop a message!</p>
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+      <div class="section-container">
+        <div class="gta-section-header scroll-reveal">
+          <span class="gta-section-badge">// TAB 07 • TRANSMISSION & CONNECT</span>
+          <h2 class="section-title">Let's Connect</h2>
+          <p class="section-subtitle">Whether you want to discuss AI integrations, custom automation, or a project collaboration, feel free to drop a message!</p>
+        </div>
 
               <div class="contact-grid">
                 <div class="contact-info scroll-reveal">

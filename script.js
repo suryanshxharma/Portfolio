@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGTALoadingScreen();
   initGTAWantedHUD();
   initGTARadioStation();
+  initGTAScrollBackground();
 });
 
 /* ==========================================================================
@@ -934,3 +935,89 @@ function playGTAMissionPassedChime() {
     console.error('Vice City Mission Passed chime error:', e);
   }
 }
+
+/* ==========================================================================
+   GTA SCROLL BACKGROUND ARTWORK CROSS-FADER & PAUSE MENU NAV TRACKER
+   ========================================================================== */
+function initGTAScrollBackground() {
+  const slides = document.querySelectorAll('.gta-scroll-slide');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section[id], #hero');
+  if (!slides.length || !sections.length) return;
+
+  const sectionToBgMap = {
+    'hero': 'hero',
+    'about': 'about',
+    'experience': 'experience',
+    'terminal': 'terminal',
+    'projects': 'projects',
+    'skills': 'skills',
+    'leadership': 'leadership',
+    'contact': 'contact'
+  };
+
+  const switchSectionBg = (sectionId) => {
+    const targetBgKey = sectionToBgMap[sectionId] || 'hero';
+    slides.forEach(slide => {
+      if (slide.dataset.bgSection === targetBgKey) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
+
+    navLinks.forEach(link => {
+      if (link.dataset.section === sectionId || link.getAttribute('href') === `#${sectionId}`) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  };
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0px -40% 0px',
+    threshold: 0.2
+  };
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        switchSectionBg(id);
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => sectionObserver.observe(section));
+
+  navLinks.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      playGTAMenuClickSound();
+    });
+  });
+}
+
+function playGTAMenuClickSound() {
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    const ctx = new AudioContextClass();
+    if (ctx.state === 'suspended') ctx.resume();
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(880, ctx.currentTime);
+    gain.gain.setValueAtTime(0.04, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.05);
+  } catch (e) {
+    // silent fallback
+  }
+}
+
