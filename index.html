@@ -60,9 +60,14 @@
 
   <link rel="stylesheet" href="style.css">
 
-  <!-- Prevent FOUC: Load theme state before paint -->
+  <!-- Prevent FOUC & Force Scroll to Top on Reload -->
   <script>
     (function () {
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+
       const storedTheme = localStorage.getItem('theme');
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       const activeTheme = storedTheme || systemTheme;
@@ -70,6 +75,7 @@
 
       // Update HTML color-scheme meta
       document.addEventListener('DOMContentLoaded', () => {
+        window.scrollTo(0, 0);
         const meta = document.querySelector('meta[name="color-scheme"]');
         if (meta) {
           meta.content = activeTheme === 'dark' ? 'dark' : 'light';

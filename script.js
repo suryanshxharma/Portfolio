@@ -2,7 +2,19 @@
  * Suryansh Sharma Portfolio - Interactive Scripts
  */
 
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    window.scrollTo(0, 0);
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
+  window.scrollTo(0, 0);
   initTheme();
   initMobileMenu();
   initTerminal();
