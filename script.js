@@ -909,10 +909,18 @@ function initGTALoadingScreen() {
 
     playGTASynthArp(440, 880);
 
-    // Show mode explanation modal on first entry
-    setTimeout(() => {
-      checkShowWelcomeModal();
-    }, 600);
+    const currentMode = document.documentElement.getAttribute('data-mode') || 'arcade';
+    if (currentMode === 'arcade' && typeof window.openSanAndreasPauseMenu === 'function') {
+      // In Arcade Mode: open the GTA San Andreas Pause / Options Menu right after loading
+      setTimeout(() => {
+        window.openSanAndreasPauseMenu('GAME MENU // SURYANSH SHARMA');
+      }, 350);
+    } else {
+      // Show mode explanation modal on first entry
+      setTimeout(() => {
+        checkShowWelcomeModal();
+      }, 600);
+    }
   };
 
   enterBtn.addEventListener('click', dismissLoading);
@@ -1415,8 +1423,12 @@ function initSanAndreasPauseMenu() {
   let selectedIdx = 0;
   let isPaused = false;
 
-  function openPauseMenu() {
+  function openPauseMenu(customTitle) {
     isPaused = true;
+    const headerEl = document.getElementById('sa-pause-header');
+    if (headerEl) {
+      headerEl.textContent = customTitle || 'PAUSE // SURYANSH SHARMA';
+    }
     pauseModal.style.display = 'block';
     pauseModal.setAttribute('aria-hidden', 'false');
     playGTASynthArp(300, 600);
@@ -1426,8 +1438,15 @@ function initSanAndreasPauseMenu() {
     isPaused = false;
     pauseModal.style.display = 'none';
     pauseModal.setAttribute('aria-hidden', 'true');
+    const headerEl = document.getElementById('sa-pause-header');
+    if (headerEl) {
+      headerEl.textContent = 'PAUSE // SURYANSH SHARMA';
+    }
     playGTAMenuClickSound();
   }
+
+  window.openSanAndreasPauseMenu = openPauseMenu;
+  window.closeSanAndreasPauseMenu = closePauseMenu;
 
   if (pauseBtn) {
     pauseBtn.addEventListener('click', () => {
