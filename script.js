@@ -117,6 +117,7 @@ function initTerminal() {
       <p>  <span class="cmd-text">sudo hire</span>    - Request contract or interview discussion</p>
       <p>  <span class="cmd-text">wanted</span>       - Check current Vice City 6-Star Reputation level</p>
       <p>  <span class="cmd-text">football</span>     - Varsity football coordination & tactical vision</p>
+      <p>  <span class="cmd-text">esports</span>      - Pro esports background & creator growth record</p>
       <p>  <span class="cmd-text">clear</span>        - Clear terminal console screen</p>
     `,
     'git log': () => `
@@ -160,9 +161,10 @@ function initTerminal() {
     about: () => `
       <p class="output-success">🙋‍♂️ Suryansh Sharma - Machine Learning Developer & Technical Growth Hacker</p>
       <p class="text-dim">--------------------------------------------------</p>
-      <p>B.Tech CSE student at JUIT Class of 2026, bridging the gap between ML engineering and business growth.</p>
-      <p>Focusing on: Deep Learning, Explainable AI (XAI), Chronological financial forecasting, and Multi-Agent lead scoring pipelines.</p>
-      <p>Self-employed Full-Stack AI & Automation developer with remote freelance experience delivering 5+ enterprise applications.</p>
+      <p>B.Tech CSE student at JUIT Class of 2026, combining engineering rigor with digital distribution and audience growth.</p>
+      <p>Focusing on: Deep Learning, Explainable AI (XAI), Chronological financial forecasting, and Multi-Agent lead engines.</p>
+      <p>Creative & Operations: Former pro esports athlete, high-retention video editor, and content growth strategist scaling 10+ accounts.</p>
+      <p>Freelance & Industry: Self-employed Full-Stack AI & Automation developer delivering 5+ production enterprise web apps.</p>
     `,
     projects: () => `
       <p class="output-success">📂 Core Project Portfolios:</p>
@@ -183,11 +185,19 @@ function initTerminal() {
       <p><strong class="cmd-text">Cloud & Tools:</strong> AWS Certified Cloud Practitioner, Supabase, Razorpay API, Git, Vercel</p>
     `,
     football: () => `
-      <p class="output-success">⚽ Varsity Football Captaincy:</p>
+      <p class="output-success">⚽ Varsity Football Captaincy & Leadership:</p>
       <p class="text-dim">--------------------------------------------------</p>
       <p>Directed tactical squad training and regional player trial grids.</p>
       <p>Sports Organizer for Parakram '25 (coordinating 12+ external universities, 500+ athletes).</p>
       <p>National Cadet Corps (NCC) "C" Certificate candidate.</p>
+      <p>Pro Esports Athlete & Content Strategist (10+ creator accounts managed, 10,000+ organic views driven).</p>
+    `,
+    esports: () => `
+      <p class="output-success">🎮 Former Pro Esports Athlete & Content Strategist:</p>
+      <p class="text-dim">--------------------------------------------------</p>
+      <p>Competitive background translating elite reaction times, psychological focus, and high-intensity pacing into video editing and audience retention.</p>
+      <p>Managed 10+ creator and brand accounts across YouTube, Reels, and Shorts, driving 10,000+ organic views.</p>
+      <p>Specialization: Dynamic pacing, sound design, hook structuring, and algorithmic SEO.</p>
     `,
     clear: () => {
       history.innerHTML = '';

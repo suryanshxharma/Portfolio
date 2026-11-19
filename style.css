@@ -1421,7 +1421,7 @@ html[data-theme="light"] .moon-icon { display: block; }
 
 .leadership-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-lg);
 }
 
@@ -4059,6 +4059,16 @@ html[data-mode="pro"] .btn-hero-resume {
   transform: translateY(-4px);
   border-color: rgba(255, 0, 127, 0.5);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 0, 127, 0.25);
+}
+
+.service-card.service-card-featured {
+  grid-column: span 2;
+}
+
+@media (max-width: 900px) {
+  .service-card.service-card-featured {
+    grid-column: span 1;
+  }
 }
 
 html[data-mode="pro"] .service-card {
