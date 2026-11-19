@@ -202,6 +202,39 @@
     </div>
   </div>
 
+  <!-- Welcome Mode Guide Modal ("Choose Your Experience") -->
+  <div id="mode-welcome-modal" class="mode-welcome-overlay" aria-hidden="true" style="display: none;">
+    <div class="mode-welcome-card">
+      <div class="welcome-header">
+        <span class="welcome-badge">SELECT INTERFACE</span>
+        <h2>CHOOSE YOUR EXPERIENCE</h2>
+        <p class="welcome-sub">Switch anytime via the navbar switch or press <strong>Shift + P</strong>.</p>
+      </div>
+
+      <div class="mode-choice-grid">
+        <div class="mode-choice-card arcade-choice active" id="btn-choose-arcade">
+          <div class="choice-icon">🎮</div>
+          <h3>GTA RETRO ARCADE</h3>
+          <p>80s Vice City & San Andreas aesthetic, retro SFX, live Wanted HUD, mission dossiers, and cheat codes.</p>
+          <span class="choice-tag">IMMERSIVE • GAMIFIED</span>
+        </div>
+
+        <div class="mode-choice-card pro-choice" id="btn-choose-pro">
+          <div class="choice-icon">💼</div>
+          <h3>PRO MINIMALIST 3D</h3>
+          <p>Sleek dark slate interface, interactive 3D WebGL neural particles, gyroscopic card tilts, and clean recruiter metrics.</p>
+          <span class="choice-tag">EXECUTIVE • 3D WEBGL</span>
+        </div>
+      </div>
+
+      <div class="welcome-footer">
+        <button id="btn-dismiss-welcome" class="btn-welcome-enter">
+          <span>ENTER PORTFOLIO</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- San Andreas Fullscreen Pause Menu Modal -->
   <div id="sa-pause-menu" class="sa-pause-stage" aria-hidden="true" style="display: none;">
     <div class="sa-pause-backdrop"></div>
@@ -1189,10 +1222,15 @@
                     <span class="field-error-message" id="error-message">Message cannot be empty.</span>
                   </div>
 
-                  <button type="submit" class="btn btn-primary btn-submit">
-                    <span class="btn-text">Send Message</span>
-                    <span class="btn-spinner" aria-hidden="true"></span>
-                  </button>
+                  <div class="contact-actions-row">
+                    <button type="submit" class="btn btn-primary btn-submit">
+                      <span class="btn-text">Send Message</span>
+                      <span class="btn-spinner" aria-hidden="true"></span>
+                    </button>
+                    <a href="mailto:suryanshxharma@gmail.com?subject=Opportunity%20Discussion%20with%20Suryansh&body=Hi%20Suryansh%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20was%20impressed%20by%20your%20work%20in%20Machine%20Learning%20and%20full-stack%20systems.%20I'd%20love%20to%20connect%20regarding%20an%20opportunity.%0A%0ABest%20regards%2C" class="btn btn-secondary btn-direct-mail" id="btn-quick-mailto" title="Open in your default email client with a preloaded message">
+                      <span>Direct Mail (Preloaded) ✉️</span>
+                    </a>
+                  </div>
                 </form>
               </div>
             </div>

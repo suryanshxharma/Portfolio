@@ -337,7 +337,12 @@ html[data-theme="light"] .btn-primary {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
-  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color var(--transition-normal), border-color var(--transition-normal);
+  transform: translateY(-100%); /* Initially hidden until loading screen completes */
+}
+
+.header.header-visible {
+  transform: translateY(0);
 }
 
 .nav-container {
@@ -3774,6 +3779,196 @@ html[data-mode="pro"] .highlight-card h3 {
 html[data-mode="pro"] .project-tags,
 html[data-mode="pro"] .p-stat {
   transform: translateZ(12px);
+}
+
+/* ==========================================================================
+   CONTACT ACTIONS & WELCOME GUIDE MODAL
+   ========================================================================== */
+.contact-actions-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn-direct-mail {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.btn-direct-mail:hover {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--gta-cyan);
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
+/* Welcome Mode Choice Modal */
+.mode-welcome-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: rgba(5, 2, 15, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  user-select: none;
+}
+
+.mode-welcome-card {
+  background: rgba(14, 4, 32, 0.96);
+  border: 2px solid var(--gta-pink);
+  box-shadow: 0 0 50px rgba(255, 0, 127, 0.4), inset 0 0 25px rgba(0, 240, 255, 0.1);
+  border-radius: var(--radius-lg);
+  max-width: 680px;
+  width: 100%;
+  padding: 32px;
+  text-align: center;
+  animation: welcome-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes welcome-pop {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.welcome-header h2 {
+  font-family: 'Rajdhani', var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 2px;
+  margin-top: 8px;
+}
+
+.welcome-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gta-cyan);
+  letter-spacing: 2px;
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid var(--gta-cyan);
+  padding: 4px 12px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.welcome-sub {
+  font-size: 0.9rem;
+  color: var(--color-text-dim);
+  margin-top: 6px;
+  margin-bottom: 24px;
+}
+
+.mode-choice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 600px) {
+  .mode-choice-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mode-choice-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: 20px 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.mode-choice-card .choice-icon {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+}
+
+.mode-choice-card h3 {
+  font-family: 'Rajdhani', var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.arcade-choice h3 {
+  color: var(--gta-yellow);
+}
+
+.pro-choice h3 {
+  color: #818cf8;
+}
+
+.mode-choice-card p {
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+  line-height: 1.4;
+  margin-bottom: 12px;
+  flex: 1;
+}
+
+.choice-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: var(--gta-cyan);
+}
+
+.mode-choice-card:hover,
+.mode-choice-card.active {
+  transform: translateY(-4px);
+}
+
+.arcade-choice.active {
+  border-color: var(--gta-pink);
+  background: rgba(255, 0, 127, 0.15);
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+}
+
+.pro-choice.active {
+  border-color: #6366f1;
+  background: rgba(99, 102, 241, 0.18);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+.btn-welcome-enter {
+  background: linear-gradient(135deg, var(--gta-pink), var(--gta-cyan));
+  color: #000000;
+  font-family: 'Rajdhani', var(--font-heading);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 2px;
+  padding: 12px 32px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+}
+
+.btn-welcome-enter:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 0, 127, 0.7);
 }
 
 

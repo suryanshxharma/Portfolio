@@ -815,10 +815,19 @@ function initContactForm() {
     }
 
     setTimeout(() => {
-      // Success toast trigger
-      alert(`Thank you, ${fields.name.el.value}! Your message has been sent successfully.`);
+      // Preload and launch direct email client with message body
+      const name = encodeURIComponent(fields.name.el.value.trim());
+      const email = encodeURIComponent(fields.email.el.value.trim());
+      const userMsg = encodeURIComponent(fields.message.el.value.trim());
+
+      const mailtoUrl = `mailto:suryanshxharma@gmail.com?subject=Portfolio%20Inquiry%20from%20${name}&body=Name%3A%20${name}%0AEmail%3A%20${email}%0A%0AMessage%3A%0A${userMsg}`;
+
       addReputationStar();
+      addCash(250000);
       triggerGTAMissionPassed('CONTACT INITIATED!', '+$250,000 RESPECT');
+
+      // Trigger user's mail client with prefilled data
+      window.location.href = mailtoUrl;
       
       // Reset form
       form.reset();
@@ -826,7 +835,7 @@ function initContactForm() {
         btn.classList.remove('loading');
         btn.disabled = false;
       }
-    }, 1500);
+    }, 800);
   });
 }
 
@@ -881,10 +890,19 @@ function initGTALoadingScreen() {
   const dismissLoading = () => {
     clearInterval(slideInterval);
     loadingScreen.classList.add('hidden');
+
+    // Slide navbar into view smoothly
+    const mainHeader = document.getElementById('main-header');
+    if (mainHeader) {
+      mainHeader.classList.add('header-visible');
+    }
+
     playGTASynthArp(440, 880);
+
+    // Show mode explanation modal on first entry
     setTimeout(() => {
-      triggerGTAMissionPassed('WELCOME TO VICE CITY', 'WELCOME TO SURYANSH SHARMA PORTFOLIO');
-    }, 800);
+      checkShowWelcomeModal();
+    }, 600);
   };
 
   enterBtn.addEventListener('click', dismissLoading);
@@ -983,6 +1001,7 @@ function playGTALoadedChime() {
 
 function playGTASynthArp(startFreq, endFreq) {
   try {
+    const isPro = document.documentElement.getAttribute('data-mode') === 'pro';
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (!AudioContextClass) return;
     const ctx = new AudioContextClass();
@@ -990,15 +1009,30 @@ function playGTASynthArp(startFreq, endFreq) {
 
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
-    osc.type = 'square';
-    osc.frequency.setValueAtTime(startFreq, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(endFreq, ctx.currentTime + 0.2);
-    gain.gain.setValueAtTime(0.15, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start();
-    osc.stop(ctx.currentTime + 0.3);
+
+    if (isPro) {
+      // Pro Mode: Warm harmonic glass tone
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(520, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(650, ctx.currentTime + 0.18);
+      gain.gain.setValueAtTime(0.04, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.22);
+    } else {
+      // Arcade Mode: 80s arcade square wave arpeggio
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(startFreq, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(endFreq, ctx.currentTime + 0.2);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.3);
+    }
   } catch (e) {
     console.error('Vice City synth arp error:', e);
   }
@@ -1006,10 +1040,29 @@ function playGTASynthArp(startFreq, endFreq) {
 
 function playGTAMissionPassedChime() {
   try {
+    const isPro = document.documentElement.getAttribute('data-mode') === 'pro';
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (!AudioContextClass) return;
     const ctx = new AudioContextClass();
     if (ctx.state === 'suspended') ctx.resume();
+
+    if (isPro) {
+      // Pro Mode: Elegant two-tone major chime
+      const proNotes = [440, 659.25];
+      proNotes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.1);
+        gain.gain.setValueAtTime(0.06, ctx.currentTime + idx * 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.1 + 0.4);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + idx * 0.1);
+        osc.stop(ctx.currentTime + idx * 0.1 + 0.5);
+      });
+      return;
+    }
 
     // Classic Vice City fanfare arpeggio synth
     const notes = [523.25, 659.25, 783.99, 1046.50]; // C - E - G - High C
@@ -1185,12 +1238,15 @@ function initGTACursor() {
   });
 
   document.body.addEventListener('mousedown', () => {
-    cursor.classList.add('clicking');
-    cursor.classList.add('firing');
-    playGTAGunfireSound();
-    setTimeout(() => {
-      cursor.classList.remove('firing');
-    }, 150);
+    // Only fire gun sound and reticle burst in Arcade Mode
+    if (document.documentElement.getAttribute('data-mode') !== 'pro') {
+      cursor.classList.add('clicking');
+      cursor.classList.add('firing');
+      playGTAGunfireSound();
+      setTimeout(() => {
+        cursor.classList.remove('firing');
+      }, 150);
+    }
   });
 
   document.body.addEventListener('mouseup', () => {
@@ -1258,6 +1314,7 @@ function playGTAGunfireSound() {
 
 function playGTAMenuClickSound() {
   try {
+    const isPro = document.documentElement.getAttribute('data-mode') === 'pro';
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (!AudioContextClass) return;
     const ctx = new AudioContextClass();
@@ -1265,14 +1322,26 @@ function playGTAMenuClickSound() {
 
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(880, ctx.currentTime);
-    gain.gain.setValueAtTime(0.04, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+
+    if (isPro) {
+      // Pro Mode: Sophisticated, soft Apple/Linear style tactile tap
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(320, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.04);
+      gain.gain.setValueAtTime(0.02, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.04);
+    } else {
+      // Arcade Mode: Crisp retro 8-bit blip
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, ctx.currentTime);
+      gain.gain.setValueAtTime(0.04, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+    }
+
     osc.connect(gain);
     gain.connect(ctx.destination);
     osc.start();
-    osc.stop(ctx.currentTime + 0.05);
+    osc.stop(ctx.currentTime + (isPro ? 0.04 : 0.05));
   } catch (e) {
     // silent fallback
   }
@@ -1960,6 +2029,66 @@ function initPro3DCardTilt() {
       }
     });
   });
+}
+
+/* ==========================================================================
+   TASK 3: WELCOME MODE GUIDE MODAL (CHOOSE YOUR EXPERIENCE)
+   ========================================================================== */
+function checkShowWelcomeModal() {
+  const modal = document.getElementById('mode-welcome-modal');
+  const arcadeCard = document.getElementById('btn-choose-arcade');
+  const proCard = document.getElementById('btn-choose-pro');
+  const enterBtn = document.getElementById('btn-dismiss-welcome');
+  if (!modal) return;
+
+  const hasSeenModal = localStorage.getItem('portfolio-welcome-seen');
+  if (hasSeenModal) {
+    triggerGTAMissionPassed('WELCOME TO VICE CITY', 'WELCOME TO SURYANSH SHARMA PORTFOLIO');
+    return;
+  }
+
+  let selectedChoice = localStorage.getItem('portfolio-mode') || 'arcade';
+  modal.style.display = 'flex';
+  modal.setAttribute('aria-hidden', 'false');
+
+  function updateChoiceUI() {
+    if (arcadeCard && proCard) {
+      if (selectedChoice === 'arcade') {
+        arcadeCard.classList.add('active');
+        proCard.classList.remove('active');
+      } else {
+        proCard.classList.add('active');
+        arcadeCard.classList.remove('active');
+      }
+    }
+  }
+  updateChoiceUI();
+
+  if (arcadeCard) {
+    arcadeCard.addEventListener('click', () => {
+      selectedChoice = 'arcade';
+      updateChoiceUI();
+      setPortfolioMode('arcade');
+    });
+  }
+
+  if (proCard) {
+    proCard.addEventListener('click', () => {
+      selectedChoice = 'pro';
+      updateChoiceUI();
+      setPortfolioMode('pro');
+    });
+  }
+
+  if (enterBtn) {
+    enterBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      localStorage.setItem('portfolio-welcome-seen', 'true');
+      playGTAMissionPassedChime();
+      triggerGTAMissionPassed('INTERFACE READY', `MODE: ${selectedChoice.toUpperCase()}`);
+    });
+  }
 }
 
 
