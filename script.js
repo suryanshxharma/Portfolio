@@ -140,7 +140,9 @@ function initTerminal() {
       <p><strong>Location:</strong> Himachal Pradesh / Delhi NCR, India (Open to Remote / Relocation)</p>
       <p><strong>Role:</strong> Machine Learning Engineer & Technical Growth Hacker</p>
       <p><strong>Certifications:</strong> AWS Certified Cloud Practitioner</p>
-      <p><strong>Contact:</strong> suryanshxharma@gmail.com | <a href="https://linkedin.com/in/suryanshxharma" target="_blank" style="color: #00f0ff;">linkedin.com/in/suryanshxharma</a></p>
+      <p><strong>Contact:</strong> suryanshxharma@gmail.com | <a href="https://linkedin.com/in/suryanshxharma" target="_blank" rel="noopener noreferrer" style="color: #00f0ff;">linkedin.com/in/suryanshxharma</a></p>
+      <p class="text-dim">--------------------------------------------------</p>
+      <p>📥 Direct PDF Download: <a href="Suryansh_Sharma_Resume.pdf" download="Suryansh_Sharma_Resume.pdf" target="_blank" rel="noopener noreferrer" style="color: #ff007f; font-weight: 700; text-decoration: underline;">[Download Suryansh_Sharma_Resume.pdf]</a></p>
     `,
     'sudo hire': () => {
       addCash(500000);
@@ -1520,6 +1522,16 @@ function initSanAndreasPauseMenu() {
 
     if (action === 'resume') {
       closePauseMenu();
+    } else if (action === 'resume-pdf') {
+      closePauseMenu();
+      const a = document.createElement('a');
+      a.href = 'Suryansh_Sharma_Resume.pdf';
+      a.download = 'Suryansh_Sharma_Resume.pdf';
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     } else if (action === 'radio') {
       closePauseMenu();
       const radioBtn = document.getElementById('gta-radio-toggle');

@@ -3982,4 +3982,277 @@ html[data-mode="pro"] .p-stat {
   box-shadow: 0 0 30px rgba(255, 0, 127, 0.7);
 }
 
+/* ==========================================================================
+   DOWNLOAD RESUME BUTTON & SERVICES SECTION
+   ========================================================================== */
+
+/* Hero Resume CTA */
+.btn-hero-resume {
+  background: linear-gradient(135deg, #00f0ff, #ff007f) !important;
+  color: #05070c !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35) !important;
+  transition: all 0.25s ease !important;
+}
+
+.btn-hero-resume:hover {
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 0 0 30px rgba(255, 0, 127, 0.6) !important;
+}
+
+html[data-mode="pro"] .btn-hero-resume {
+  background: linear-gradient(135deg, #6366f1, #3b82f6) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 18px rgba(99, 102, 241, 0.35) !important;
+}
+
+/* Services Section */
+.services-section {
+  padding: var(--space-3xl) 0;
+  position: relative;
+  z-index: 2;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+}
+
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+.service-card {
+  background: rgba(18, 24, 38, 0.52);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.28s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gta-pink), var(--gta-cyan), transparent);
+  opacity: 0.6;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 0, 127, 0.5);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 0, 127, 0.25);
+}
+
+html[data-mode="pro"] .service-card {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html[data-mode="pro"] .service-card:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+html[data-theme="light"] .service-card {
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #111827;
+}
+
+.service-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.service-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.service-tag {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 240, 255, 0.12);
+  color: var(--gta-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+html[data-mode="pro"] .service-tag {
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.service-title {
+  font-family: 'Rajdhani', var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #ffffff;
+  margin-bottom: var(--space-sm);
+}
+
+html[data-theme="light"] .service-title {
+  color: #0f172a;
+}
+
+.service-desc {
+  color: var(--color-text-muted);
+  font-size: 0.96rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+  flex-grow: 1;
+}
+
+.service-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-lg) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-features li {
+  font-size: 0.9rem;
+  color: rgba(230, 240, 255, 0.85);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+html[data-theme="light"] .service-features li {
+  color: #334155;
+}
+
+.service-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: auto;
+  gap: 12px;
+}
+
+.service-metric {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--gta-pink);
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 1px;
+}
+
+html[data-mode="pro"] .service-metric {
+  color: #a5b4fc;
+}
+
+/* Engagement Process */
+.engagement-process-container {
+  background: rgba(18, 24, 38, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  margin-top: var(--space-lg);
+}
+
+.process-header {
+  margin-bottom: var(--space-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: var(--space-sm);
+}
+
+.process-header h3 {
+  font-family: 'Rajdhani', var(--font-heading);
+  letter-spacing: 2px;
+  color: var(--gta-cyan);
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+}
+
+.process-header p {
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+@media (max-width: 768px) {
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+.process-step {
+  position: relative;
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.process-step .step-num {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--gta-pink);
+  opacity: 0.85;
+  margin-bottom: var(--space-xs);
+}
+
+html[data-mode="pro"] .process-step .step-num {
+  color: #818cf8;
+}
+
+.process-step h4 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #ffffff;
+  margin-bottom: var(--space-xs);
+}
+
+html[data-theme="light"] .process-step h4 {
+  color: #0f172a;
+}
+
+.process-step p {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
 
