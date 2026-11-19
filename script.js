@@ -234,12 +234,22 @@ function initTerminal() {
     }
   };
 
+  const escapeHtml = (str) => {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  };
+
   const handleCommand = (cmdText) => {
     const cleanCmd = cmdText.trim().toLowerCase();
+    const safeCmdText = escapeHtml(cmdText);
     
     // Add command input row to history
     const commandRow = document.createElement('p');
-    commandRow.innerHTML = `<span class="prompt-symbol">suryansh@juit:~$</span> <span class="cmd-text">${cmdText}</span>`;
+    commandRow.innerHTML = `<span class="prompt-symbol">suryansh@juit:~$</span> <span class="cmd-text">${safeCmdText}</span>`;
     history.appendChild(commandRow);
 
     if (cleanCmd === '') return;
@@ -248,7 +258,7 @@ function initTerminal() {
     if (commands[cleanCmd]) {
       responseDiv.innerHTML = commands[cleanCmd]();
     } else {
-      responseDiv.innerHTML = `<p class="output-error">Command not found: "${cmdText}". Type <span class="cmd-text">help</span> to list available commands.</p>`;
+      responseDiv.innerHTML = `<p class="output-error">Command not found: "${safeCmdText}". Type <span class="cmd-text">help</span> to list available commands.</p>`;
     }
     history.appendChild(responseDiv);
     
