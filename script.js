@@ -27,6 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initGTARadioStation();
   initGTAScrollBackground();
   initGTACursor();
+  initGTAHUDClock();
+  initSanAndreasPauseMenu();
+  initRadioWheelModal();
+  initCheatCodes();
+  initHybridModeSwitch();
+  initProjectCardMiniDemos();
+  initPro3DWebGL();
+  initPro3DCardTilt();
 });
 
 /* ==========================================================================
@@ -101,13 +109,52 @@ function initTerminal() {
   const commands = {
     help: () => `
       <p class="cmd-text">Available commands:</p>
-      <p>  <span class="cmd-text">about</span>      - Personal summary and background</p>
-      <p>  <span class="cmd-text">projects</span>   - Core project portfolio overview</p>
-      <p>  <span class="cmd-text">skills</span>     - Technical capabilities checklist</p>
-      <p>  <span class="cmd-text">wanted</span>     - Check current Vice City 6-Star Reputation level</p>
-      <p>  <span class="cmd-text">football</span>   - Varsity football coordination & tactical vision</p>
-      <p>  <span class="cmd-text">clear</span>      - Clear terminal console screen</p>
+      <p>  <span class="cmd-text">about</span>        - Personal summary and background</p>
+      <p>  <span class="cmd-text">projects</span>     - Core project portfolio overview</p>
+      <p>  <span class="cmd-text">skills</span>       - Technical capabilities checklist</p>
+      <p>  <span class="cmd-text">git log</span>      - View career & engineering commit history</p>
+      <p>  <span class="cmd-text">cat resume</span>   - Display full resume dossier</p>
+      <p>  <span class="cmd-text">sudo hire</span>    - Request contract or interview discussion</p>
+      <p>  <span class="cmd-text">wanted</span>       - Check current Vice City 6-Star Reputation level</p>
+      <p>  <span class="cmd-text">football</span>     - Varsity football coordination & tactical vision</p>
+      <p>  <span class="cmd-text">clear</span>        - Clear terminal console screen</p>
     `,
+    'git log': () => `
+      <p style="color: #ffcc00;">commit a1b2c3d4 (HEAD -> main)</p>
+      <p class="text-dim">Author: Suryansh Sharma &lt;suryanshxharma@gmail.com&gt;</p>
+      <p class="text-dim">Date:   Class of 2026</p>
+      <p>&nbsp;&nbsp;feat(ai): Vision Transformer & ResNet-50 97.91% crop disease XAI</p>
+      <p>&nbsp;</p>
+      <p style="color: #ffcc00;">commit e5f6a7b8</p>
+      <p class="text-dim">Author: Suryansh Sharma &lt;suryanshxharma@gmail.com&gt;</p>
+      <p>&nbsp;&nbsp;feat(quant): sequential LSTM/GRU 21-indicator stock prediction pipeline</p>
+      <p>&nbsp;</p>
+      <p style="color: #ffcc00;">commit c9d0e1f2</p>
+      <p class="text-dim">Author: Suryansh Sharma &lt;suryanshxharma@gmail.com&gt;</p>
+      <p>&nbsp;&nbsp;feat(growth): multi-agent intent extractor & Reddit lead generator</p>
+    `,
+    'cat resume': () => `
+      <p class="output-success">📄 SURYANSH SHARMA - RESUME DOSSIER</p>
+      <p class="text-dim">--------------------------------------------------</p>
+      <p><strong>Education:</strong> B.Tech in CSE @ Jaypee University of Information Technology (2022 - 2026)</p>
+      <p><strong>Location:</strong> Himachal Pradesh / Delhi NCR, India (Open to Remote / Relocation)</p>
+      <p><strong>Role:</strong> Machine Learning Engineer & Technical Growth Hacker</p>
+      <p><strong>Certifications:</strong> AWS Certified Cloud Practitioner</p>
+      <p><strong>Contact:</strong> suryanshxharma@gmail.com | <a href="https://linkedin.com/in/suryanshxharma" target="_blank" style="color: #00f0ff;">linkedin.com/in/suryanshxharma</a></p>
+    `,
+    'sudo hire': () => {
+      addCash(500000);
+      addReputationStar();
+      triggerGTAMissionPassed('OFFER EXTENDED! ⭐⭐⭐', '+$500,000 SIGNING BONUS');
+      return `
+        <p class="output-success">🎉 [ACCESS GRANTED - ROOT PRIVILEGES] 🎉</p>
+        <p class="text-dim">--------------------------------------------------</p>
+        <p>You've unlocked the executive hiring fast-track!</p>
+        <p>Let's build scalable AI engineering and growth systems together:</p>
+        <p>👉 <a href="mailto:suryanshxharma@gmail.com?subject=Opportunity%20Discussion%20with%20Suryansh" style="color: #2ecc71; font-weight: 700; text-decoration: underline;">Email suryanshxharma@gmail.com</a></p>
+        <p>👉 Or scroll down to the <a href="#contact" style="color: #ff007f; font-weight: 700;">#contact</a> section to send a direct message.</p>
+      `;
+    },
     about: () => `
       <p class="output-success">🙋‍♂️ Suryansh Sharma - Machine Learning Developer & Technical Growth Hacker</p>
       <p class="text-dim">--------------------------------------------------</p>
@@ -212,12 +259,45 @@ function initTerminal() {
     }
   };
 
-  // Keyboard Enter Listener
+  // Command history buffer for up/down arrows
+  const cmdHistoryBuffer = [];
+  let historyIndex = -1;
+
+  // Keyboard Enter & Tab Autocomplete Listener
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       const val = input.value;
+      if (val.trim()) {
+        cmdHistoryBuffer.push(val);
+        historyIndex = cmdHistoryBuffer.length;
+      }
       input.value = '';
       handleCommand(val);
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      const currentVal = input.value.trim().toLowerCase();
+      if (!currentVal) return;
+      const allCmds = Object.keys(commands);
+      const match = allCmds.find(c => c.startsWith(currentVal));
+      if (match) {
+        input.value = match;
+        playGTAMenuClickSound();
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (cmdHistoryBuffer.length > 0 && historyIndex > 0) {
+        historyIndex--;
+        input.value = cmdHistoryBuffer[historyIndex] || '';
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex < cmdHistoryBuffer.length - 1) {
+        historyIndex++;
+        input.value = cmdHistoryBuffer[historyIndex] || '';
+      } else {
+        historyIndex = cmdHistoryBuffer.length;
+        input.value = '';
+      }
     }
   });
 
@@ -248,6 +328,7 @@ function initProjectDialogs() {
       if (dialog) {
         dialog.showModal();
         addReputationStar();
+        addCash(100000);
         const projTitle = dialog.querySelector('h2') ? dialog.querySelector('h2').textContent : 'PROJECT DISCOVERED';
         triggerGTAMissionPassed(projTitle, '+$100,000 RESPECT');
       }
@@ -1196,4 +1277,689 @@ function playGTAMenuClickSound() {
     // silent fallback
   }
 }
+
+/* ==========================================================================
+   TASK 1: GTA HUD CLOCK & BOUNTY
+   ========================================================================== */
+let playerCash = 1337420;
+
+function initGTAHUDClock() {
+  const clockEl = document.getElementById('gta-hud-clock');
+  const cashEl = document.getElementById('gta-hud-cash');
+  if (!clockEl) return;
+
+  function updateClock() {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    clockEl.textContent = `${hours}:${minutes} ${ampm}`;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  if (cashEl) {
+    cashEl.textContent = `$${playerCash.toLocaleString()}`;
+  }
+}
+
+function addCash(amount) {
+  playerCash += amount;
+  const cashEl = document.getElementById('gta-hud-cash');
+  if (cashEl) {
+    cashEl.textContent = `$${playerCash.toLocaleString()}`;
+    cashEl.style.color = '#ffffff';
+    setTimeout(() => { cashEl.style.color = '#2ecc71'; }, 300);
+  }
+}
+
+/* ==========================================================================
+   TASK 2: SAN ANDREAS FULLSCREEN PAUSE MENU SYSTEM (ESC & CLICK)
+   ========================================================================== */
+function initSanAndreasPauseMenu() {
+  const pauseModal = document.getElementById('sa-pause-menu');
+  const pauseBtn = document.getElementById('gta-pause-btn');
+  const menuItems = document.querySelectorAll('.sa-menu-item');
+  const photoImg = document.getElementById('sa-pause-photo-img');
+  if (!pauseModal) return;
+
+  const photos = [
+    'pics/gta_slide_1.png',
+    'pics/gta_slide_2.jpg',
+    'pics/gta_slide_3.jpg',
+    'pics/gta_slide_4.png',
+    'pics/gta_slide_5.png',
+    'pics/gta_slide_7.jpg'
+  ];
+
+  let selectedIdx = 0;
+  let isPaused = false;
+
+  function openPauseMenu() {
+    isPaused = true;
+    pauseModal.style.display = 'block';
+    pauseModal.setAttribute('aria-hidden', 'false');
+    playGTASynthArp(300, 600);
+  }
+
+  function closePauseMenu() {
+    isPaused = false;
+    pauseModal.style.display = 'none';
+    pauseModal.setAttribute('aria-hidden', 'true');
+    playGTAMenuClickSound();
+  }
+
+  if (pauseBtn) {
+    pauseBtn.addEventListener('click', () => {
+      if (isPaused) closePauseMenu();
+      else openPauseMenu();
+    });
+  }
+
+  // Keyboard navigation & ESC handler
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const radioModal = document.getElementById('gta-radio-wheel-modal');
+      if (radioModal && radioModal.style.display !== 'none') {
+        radioModal.style.display = 'none';
+        return;
+      }
+      if (isPaused) {
+        closePauseMenu();
+      } else {
+        openPauseMenu();
+      }
+      return;
+    }
+
+    if (!isPaused) return;
+
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      selectedIdx = (selectedIdx - 1 + menuItems.length) % menuItems.length;
+      updateActiveMenuItem();
+      playGTAMenuClickSound();
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      selectedIdx = (selectedIdx + 1) % menuItems.length;
+      updateActiveMenuItem();
+      playGTAMenuClickSound();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      executeMenuItem(menuItems[selectedIdx]);
+    }
+  });
+
+  function updateActiveMenuItem() {
+    menuItems.forEach((item, idx) => {
+      if (idx === selectedIdx) {
+        item.classList.add('active');
+        if (photoImg && photos[idx % photos.length]) {
+          photoImg.src = photos[idx % photos.length];
+        }
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
+
+  menuItems.forEach((item, idx) => {
+    item.addEventListener('mouseenter', () => {
+      selectedIdx = idx;
+      updateActiveMenuItem();
+      playGTAMenuClickSound();
+    });
+
+    item.addEventListener('click', () => {
+      executeMenuItem(item);
+    });
+  });
+
+  function executeMenuItem(item) {
+    const action = item.getAttribute('data-action');
+    const target = item.getAttribute('data-target');
+
+    if (action === 'resume') {
+      closePauseMenu();
+    } else if (action === 'radio') {
+      closePauseMenu();
+      const radioBtn = document.getElementById('gta-radio-toggle');
+      if (radioBtn) radioBtn.click();
+    } else if (action === 'toggle-mode') {
+      closePauseMenu();
+      toggleHybridMode();
+    } else if (action === 'quit') {
+      closePauseMenu();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (target) {
+      closePauseMenu();
+      const el = document.querySelector(target);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   TASK 3: RADIO STATION WHEEL DIAL POPUP
+   ========================================================================== */
+function initRadioWheelModal() {
+  const radioBtn = document.getElementById('gta-radio-toggle');
+  const wheelModal = document.getElementById('gta-radio-wheel-modal');
+  const closeBtn = document.getElementById('radio-close-btn');
+  const muteBtn = document.getElementById('radio-mute-btn');
+  const stationCards = document.querySelectorAll('.station-card');
+  const stationNameEl = document.getElementById('gta-station-name');
+  if (!wheelModal) return;
+
+  if (radioBtn) {
+    radioBtn.addEventListener('click', (e) => {
+      // Toggle popup on click
+      wheelModal.style.display = 'flex';
+      wheelModal.setAttribute('aria-hidden', 'false');
+      playGTASynthArp(400, 700);
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      wheelModal.style.display = 'none';
+      wheelModal.setAttribute('aria-hidden', 'true');
+      playGTAMenuClickSound();
+    });
+  }
+
+  const overlay = wheelModal.querySelector('.radio-wheel-overlay');
+  if (overlay) {
+    overlay.addEventListener('click', () => {
+      wheelModal.style.display = 'none';
+      wheelModal.setAttribute('aria-hidden', 'true');
+    });
+  }
+
+  stationCards.forEach(card => {
+    card.addEventListener('click', () => {
+      stationCards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      const idx = parseInt(card.getAttribute('data-station'), 10) || 0;
+      currentStationIndex = idx;
+      const st = radioStations[idx] || radioStations[0];
+      if (stationNameEl) stationNameEl.textContent = st.name;
+      
+      playGTASynthArp(st.freq, st.freq * 1.5);
+      setTimeout(() => {
+        wheelModal.style.display = 'none';
+        wheelModal.setAttribute('aria-hidden', 'true');
+      }, 400);
+    });
+  });
+
+  if (muteBtn) {
+    let isMuted = false;
+    muteBtn.addEventListener('click', () => {
+      isMuted = !isMuted;
+      muteBtn.textContent = isMuted ? 'Unmute Audio 🔊' : 'Mute Audio 🔇';
+      if (stationNameEl) stationNameEl.textContent = isMuted ? 'OFF AIR' : radioStations[currentStationIndex].name;
+    });
+  }
+}
+
+/* ==========================================================================
+   TASK 5: CHEAT CODES ENGINE (HESOYAM, AEZAKMI, BAGUVIX)
+   ========================================================================== */
+function initCheatCodes() {
+  let keyBuffer = '';
+  const cheatToast = document.getElementById('gta-cheat-toast');
+  const cheatNameEl = document.getElementById('gta-cheat-name');
+
+  const cheats = {
+    'hesoyam': () => {
+      addCash(250000);
+      showCheatToast('HESOYAM - HEALTH, ARMOR & +$250,000 CASH');
+      playGTAMissionPassedChime();
+    },
+    'aezakmi': () => {
+      currentWantedStars = 6;
+      updateWantedStarsUI();
+      showCheatToast('AEZAKMI - 6-STAR MAXIMUM WANTED REPUTATION');
+      playGTASynthArp(600, 1200);
+    },
+    'professionalskit': () => {
+      showCheatToast('PROFESSIONALSKIT - ALL ARSENAL & ML TOOLS UNLOCKED');
+      playGTALoadedChime();
+    },
+    'leavemealone': () => {
+      currentWantedStars = 0;
+      updateWantedStarsUI();
+      showCheatToast('LEAVEMEALONE - 0 WANTED LEVEL CLEARED');
+    }
+  };
+
+  document.addEventListener('keydown', (e) => {
+    // Ignore input if user is typing in form or terminal
+    if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+    
+    keyBuffer += e.key.toLowerCase();
+    if (keyBuffer.length > 25) {
+      keyBuffer = keyBuffer.slice(-25);
+    }
+
+    for (const [code, handler] of Object.entries(cheats)) {
+      if (keyBuffer.endsWith(code)) {
+        handler();
+        keyBuffer = '';
+        break;
+      }
+    }
+  });
+
+  function showCheatToast(text) {
+    if (!cheatToast || !cheatNameEl) return;
+    cheatNameEl.textContent = text;
+    cheatToast.classList.add('show');
+    setTimeout(() => {
+      cheatToast.classList.remove('show');
+    }, 3500);
+  }
+}
+
+/* ==========================================================================
+   TASK 6: HYBRID MODE TOGGLE (GTA ARCADE vs PRO RECRUITER)
+   ========================================================================== */
+function initHybridModeSwitch() {
+  const modeBtn = document.getElementById('mode-toggle-btn');
+  const modeIcon = document.getElementById('mode-icon');
+  const modeLabel = document.getElementById('mode-label');
+
+  // Check saved mode in localStorage
+  const savedMode = localStorage.getItem('portfolio-mode') || 'arcade';
+  setPortfolioMode(savedMode);
+
+  if (modeBtn) {
+    modeBtn.addEventListener('click', () => {
+      toggleHybridMode();
+    });
+  }
+
+  // Keyboard shortcut: Shift + P to toggle mode
+  document.addEventListener('keydown', (e) => {
+    if (e.shiftKey && e.key.toLowerCase() === 'p') {
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+      toggleHybridMode();
+    }
+  });
+}
+
+function toggleHybridMode() {
+  const currentMode = document.documentElement.getAttribute('data-mode') || 'arcade';
+  const newMode = currentMode === 'arcade' ? 'pro' : 'arcade';
+  setPortfolioMode(newMode);
+}
+
+function setPortfolioMode(mode) {
+  const modeIcon = document.getElementById('mode-icon');
+  const modeLabel = document.getElementById('mode-label');
+
+  document.documentElement.setAttribute('data-mode', mode);
+  localStorage.setItem('portfolio-mode', mode);
+
+  if (mode === 'pro') {
+    if (modeIcon) modeIcon.textContent = '💼';
+    if (modeLabel) modeLabel.textContent = 'PRO MODE';
+  } else {
+    if (modeIcon) modeIcon.textContent = '🎮';
+    if (modeLabel) modeLabel.textContent = 'ARCADE';
+  }
+  updatePro3DRunningState();
+  playGTAMenuClickSound();
+}
+
+/* ==========================================================================
+   LIVE INTERACTIVE MINI-DEMOS INSIDE PROJECT CARDS
+   ========================================================================== */
+function initProjectCardMiniDemos() {
+  // 1. Crop Disease Interactive Heatmap Reveal Slider
+  const slider = document.getElementById('card-xai-slider');
+  const heatmapLayer = document.getElementById('card-heatmap-layer');
+  const divider = document.getElementById('card-xai-divider');
+
+  if (slider && heatmapLayer && divider) {
+    slider.addEventListener('input', (e) => {
+      const val = e.target.value;
+      heatmapLayer.style.clipPath = `polygon(${val}% 0%, 100% 0%, 100% 100%, ${val}% 100%)`;
+      divider.style.left = `${val}%`;
+    });
+  }
+
+  // 2. Stock Prediction Live Timeframe/Model Scrubber
+  const modelButtons = document.querySelectorAll('.timeframe-btn');
+  const actualPath = document.getElementById('stock-actual-path');
+  const predPath = document.getElementById('stock-pred-path');
+  const hoverDot = document.getElementById('stock-hover-dot');
+  const modelLabel = document.getElementById('stock-model-label');
+
+  const modelPaths = {
+    lstm: {
+      pred: 'M 0 52 L 20 46 L 40 48 L 60 39 L 80 40 L 100 22 L 120 28 L 140 16 L 160 10',
+      stroke: '#2ecc71',
+      label: 'MODEL: LSTM (98.2%)'
+    },
+    gru: {
+      pred: 'M 0 52 L 20 45 L 40 49 L 60 41 L 80 43 L 100 25 L 120 29 L 140 19 L 160 13',
+      stroke: '#00f0ff',
+      label: 'MODEL: GRU (97.8%)'
+    },
+    baseline: {
+      pred: 'M 0 52 L 20 50 L 40 47 L 60 45 L 80 44 L 100 38 L 120 35 L 140 30 L 160 26',
+      stroke: '#ff007f',
+      label: 'MODEL: ARIMA (BASELINE)'
+    }
+  };
+
+  modelButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      modelButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const key = btn.getAttribute('data-model');
+      if (modelPaths[key]) {
+        if (predPath) {
+          predPath.setAttribute('d', modelPaths[key].pred);
+          predPath.setAttribute('stroke', modelPaths[key].stroke);
+        }
+        if (modelLabel) {
+          modelLabel.textContent = modelPaths[key].label;
+          modelLabel.style.color = modelPaths[key].stroke;
+        }
+        playGTAMenuClickSound();
+      }
+    });
+  });
+
+  // Scrubber mousemove inside Stock visual
+  const stockBox = document.getElementById('stock-mini-interactive');
+  if (stockBox && hoverDot) {
+    stockBox.addEventListener('mousemove', (e) => {
+      const rect = stockBox.getBoundingClientRect();
+      const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      const targetX = pct * 160;
+      hoverDot.setAttribute('cx', targetX);
+      // Rough bezier interpolation for Y
+      const targetY = 52 - pct * 40;
+      hoverDot.setAttribute('cy', targetY);
+    });
+  }
+}
+
+/* ==========================================================================
+   TASK 1: PRO MODE INTERACTIVE 3D NEURAL PARTICLE WEBGL ENGINE
+   ========================================================================== */
+let pro3DState = {
+  active: false,
+  renderer: null,
+  scene: null,
+  camera: null,
+  points: null,
+  lines: null,
+  coreMesh: null,
+  mouse: { x: 0, y: 0, targetX: 0, targetY: 0 },
+  reqId: null
+};
+
+function initPro3DWebGL() {
+  const canvas = document.getElementById('pro-3d-canvas');
+  if (!canvas) return;
+
+  function checkInitThree() {
+    if (typeof THREE === 'undefined') {
+      setTimeout(checkInitThree, 100);
+      return;
+    }
+    setupThreeScene(canvas);
+  }
+  checkInitThree();
+}
+
+function setupThreeScene(canvas) {
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+  camera.position.z = 240;
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true,
+    antialias: true,
+    powerPreference: 'high-performance'
+  });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // 1. Generate 3D Neural Particle Constellation
+  const particleCount = 200;
+  const geometry = new THREE.BufferGeometry();
+  const positions = new Float32Array(particleCount * 3);
+  const velocities = [];
+
+  for (let i = 0; i < particleCount; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 500;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 400;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 300;
+
+    velocities.push({
+      x: (Math.random() - 0.5) * 0.4,
+      y: (Math.random() - 0.5) * 0.4,
+      z: (Math.random() - 0.5) * 0.3
+    });
+  }
+
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+  const pMaterial = new THREE.PointsMaterial({
+    color: 0x818cf8, // Indigo / Violet
+    size: 4,
+    transparent: true,
+    opacity: 0.85,
+    blending: THREE.AdditiveBlending
+  });
+
+  const particleSystem = new THREE.Points(geometry, pMaterial);
+  scene.add(particleSystem);
+
+  // 2. Synapse Line Connections
+  const maxLines = 150;
+  const linePositions = new Float32Array(maxLines * 6);
+  const lineGeometry = new THREE.BufferGeometry();
+  lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+
+  const lineMaterial = new THREE.LineBasicMaterial({
+    color: 0x4f46e5,
+    transparent: true,
+    opacity: 0.25,
+    blending: THREE.AdditiveBlending
+  });
+
+  const lineSystem = new THREE.LineSegments(lineGeometry, lineMaterial);
+  scene.add(lineSystem);
+
+  // 3. Floating Neural 3D Icosahedron Core
+  const coreGeo = new THREE.IcosahedronGeometry(36, 1);
+  const coreMat = new THREE.MeshBasicMaterial({
+    color: 0x6366f1,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.4
+  });
+  const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+  coreMesh.position.set(100, 20, -50);
+  scene.add(coreMesh);
+
+  // Internal glowing nucleus
+  const innerNucleus = new THREE.Mesh(
+    new THREE.SphereGeometry(12, 16, 16),
+    new THREE.MeshBasicMaterial({
+      color: 0x00f0ff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.7
+    })
+  );
+  coreMesh.add(innerNucleus);
+
+  pro3DState = {
+    active: false,
+    renderer,
+    scene,
+    camera,
+    particleSystem,
+    positions,
+    velocities,
+    lineSystem,
+    linePositions,
+    coreMesh,
+    innerNucleus,
+    mouse: { x: 0, y: 0, targetX: 0, targetY: 0 },
+    reqId: null
+  };
+
+  // Mouse tilt tracking
+  window.addEventListener('mousemove', (e) => {
+    const halfX = window.innerWidth / 2;
+    const halfY = window.innerHeight / 2;
+    pro3DState.mouse.targetX = (e.clientX - halfX) / halfX;
+    pro3DState.mouse.targetY = (e.clientY - halfY) / halfY;
+  });
+
+  // Window resize handler
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // Sync with portfolio mode
+  updatePro3DRunningState();
+}
+
+function updatePro3DRunningState() {
+  const currentMode = document.documentElement.getAttribute('data-mode') || 'arcade';
+  if (currentMode === 'pro' && !pro3DState.active) {
+    pro3DState.active = true;
+    animatePro3D();
+  } else if (currentMode !== 'pro' && pro3DState.active) {
+    pro3DState.active = false;
+    if (pro3DState.reqId) {
+      cancelAnimationFrame(pro3DState.reqId);
+      pro3DState.reqId = null;
+    }
+  }
+}
+
+function animatePro3D() {
+  if (!pro3DState.active || !pro3DState.renderer) return;
+
+  const { renderer, scene, camera, particleSystem, positions, velocities, lineSystem, linePositions, coreMesh, innerNucleus, mouse } = pro3DState;
+
+  // Elastic mouse camera damping
+  mouse.x += (mouse.targetX - mouse.x) * 0.05;
+  mouse.y += (mouse.targetY - mouse.y) * 0.05;
+  camera.position.x = mouse.x * 45;
+  camera.position.y = -mouse.y * 35;
+  camera.lookAt(0, 0, 0);
+
+  // Rotate Core Mesh
+  if (coreMesh) {
+    coreMesh.rotation.x += 0.005;
+    coreMesh.rotation.y += 0.008;
+    if (innerNucleus) {
+      innerNucleus.rotation.x -= 0.01;
+      innerNucleus.rotation.y -= 0.012;
+    }
+  }
+
+  // Update particles and compute synapse lines
+  const count = positions.length / 3;
+  let lineIndex = 0;
+  const maxLineDist = 65;
+
+  for (let i = 0; i < count; i++) {
+    positions[i * 3] += velocities[i].x;
+    positions[i * 3 + 1] += velocities[i].y;
+    positions[i * 3 + 2] += velocities[i].z;
+
+    // Bounce off 3D bounding box
+    if (Math.abs(positions[i * 3]) > 250) velocities[i].x *= -1;
+    if (Math.abs(positions[i * 3 + 1]) > 200) velocities[i].y *= -1;
+    if (Math.abs(positions[i * 3 + 2]) > 150) velocities[i].z *= -1;
+
+    // Connect close neighbors
+    for (let j = i + 1; j < count; j++) {
+      const dx = positions[i * 3] - positions[j * 3];
+      const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
+      const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
+      const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+      if (dist < maxLineDist && lineIndex < 150 * 6) {
+        linePositions[lineIndex++] = positions[i * 3];
+        linePositions[lineIndex++] = positions[i * 3 + 1];
+        linePositions[lineIndex++] = positions[i * 3 + 2];
+
+        linePositions[lineIndex++] = positions[j * 3];
+        linePositions[lineIndex++] = positions[j * 3 + 1];
+        linePositions[lineIndex++] = positions[j * 3 + 2];
+      }
+    }
+  }
+
+  particleSystem.geometry.attributes.position.needsUpdate = true;
+  lineSystem.geometry.attributes.position.needsUpdate = true;
+
+  renderer.render(scene, camera);
+  pro3DState.reqId = requestAnimationFrame(animatePro3D);
+}
+
+/* ==========================================================================
+   TASK 2: 3D GYROSCOPIC CARD TILT & SPECULAR Z-AXIS GLARE
+   ========================================================================== */
+function initPro3DCardTilt() {
+  const cards = document.querySelectorAll('.project-card, .stat-card, .highlight-card');
+
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      // Only active in Pro Mode
+      if (document.documentElement.getAttribute('data-mode') !== 'pro') {
+        card.style.transform = '';
+        return;
+      }
+
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Calculate percentage for specular glow
+      const pctX = (x / rect.width) * 100;
+      const pctY = (y / rect.height) * 100;
+      card.style.setProperty('--mouse-x', `${pctX}%`);
+      card.style.setProperty('--mouse-y', `${pctY}%`);
+
+      // 3D rotation math
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -9; // Max 9 deg
+      const rotateY = ((x - centerX) / centerX) * 9;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      if (document.documentElement.getAttribute('data-mode') === 'pro') {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      } else {
+        card.style.transform = '';
+      }
+    });
+  });
+}
+
 

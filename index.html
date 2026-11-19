@@ -55,10 +55,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800;900&family=Permanent+Marker&family=Fira+Code:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Permanent+Marker&family=Fira+Code:wght@400;500&family=UnifrakturMaguntia&family=Rajdhani:wght@500;600;700&display=swap"
     rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+
+  <!-- Three.js CDN for Interactive 3D Graphics in Pro Mode -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
   <!-- Prevent FOUC & Force Scroll to Top on Reload -->
   <script>
@@ -199,10 +202,78 @@
     </div>
   </div>
 
+  <!-- San Andreas Fullscreen Pause Menu Modal -->
+  <div id="sa-pause-menu" class="sa-pause-stage" aria-hidden="true" style="display: none;">
+    <div class="sa-pause-backdrop"></div>
+    <div class="sa-pause-corner-photo" id="sa-pause-photo">
+      <img src="pics/gta_slide_1.png" alt="San Andreas Art" id="sa-pause-photo-img">
+    </div>
+    <div class="sa-pause-header" id="sa-pause-header">PAUSE // SURYANSH SHARMA</div>
+    
+    <div class="sa-pause-menu-wrap" id="sa-pause-menu-wrap">
+      <div class="sa-menu-item active" data-action="resume"><span class="sa-glyph">✦</span>RESUME GAME</div>
+      <div class="sa-menu-item" data-action="stats" data-target="#about"><span class="sa-glyph">✦</span>STATS & DOSSIER</div>
+      <div class="sa-menu-item" data-action="missions" data-target="#projects"><span class="sa-glyph">✦</span>MISSIONS & ARSENAL</div>
+      <div class="sa-menu-item" data-action="terminal" data-target="#terminal"><span class="sa-glyph">✦</span>MAINFRAME TERMINAL</div>
+      <div class="sa-menu-item" data-action="radio"><span class="sa-glyph">✦</span>AUDIO & RADIO SETUP</div>
+      <div class="sa-menu-item" data-action="toggle-mode"><span class="sa-glyph">✦</span>SWITCH TO PRO / RECRUITER MODE</div>
+      <div class="sa-menu-item" data-action="quit"><span class="sa-glyph">✦</span>QUIT TO TOP</div>
+    </div>
+
+    <div class="sa-pause-footer-hint">
+      <span>NAVIGATE: [↑/↓ ARROWS or HOVER]</span>
+      <span>SELECT: [ENTER or CLICK]</span>
+      <span>BACK/RESUME: [ESC]</span>
+    </div>
+  </div>
+
+  <!-- GTA Radio Station Dial Wheel Popup -->
+  <div id="gta-radio-wheel-modal" class="gta-radio-wheel-modal" aria-hidden="true" style="display: none;">
+    <div class="radio-wheel-overlay"></div>
+    <div class="radio-wheel-container">
+      <div class="radio-wheel-title">VICE CITY AUDIO DIAL</div>
+      <div class="radio-station-cards">
+        <button class="station-card active" data-station="0">
+          <span class="st-icon">📻</span>
+          <span class="st-name">FLASH FM</span>
+          <span class="st-genre">Pop / Synthwave 80s</span>
+        </button>
+        <button class="station-card" data-station="1">
+          <span class="st-icon">⚡</span>
+          <span class="st-name">WAVE 103</span>
+          <span class="st-genre">New Wave / Synthpop</span>
+        </button>
+        <button class="station-card" data-station="2">
+          <span class="st-icon">🎸</span>
+          <span class="st-name">V-ROCK</span>
+          <span class="st-genre">Heavy Metal & Hard Rock</span>
+        </button>
+        <button class="station-card" data-station="3">
+          <span class="st-icon">🌴</span>
+          <span class="st-name">RADIO LOS SANTOS</span>
+          <span class="st-genre">West Coast Hip Hop / Lo-Fi</span>
+        </button>
+      </div>
+      <div class="radio-wheel-controls">
+        <button id="radio-mute-btn" class="radio-sub-btn">Mute Audio 🔇</button>
+        <button id="radio-close-btn" class="radio-sub-btn">Close Dial ✕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GTA Cheat Code Notification Toast -->
+  <div id="gta-cheat-toast" class="gta-cheat-toast" aria-hidden="true">
+    <div class="cheat-badge">CHEAT ACTIVATED!</div>
+    <div class="cheat-text" id="gta-cheat-name">HESOYAM</div>
+  </div>
+
   <!-- Ambient background glow elements -->
   <div class="glow-orb orb-1" aria-hidden="true"></div>
   <div class="glow-orb orb-2" aria-hidden="true"></div>
   <div class="glow-orb orb-3" aria-hidden="true"></div>
+
+  <!-- WebGL 3D Interactive Canvas Layer (Pro Mode) -->
+  <canvas id="pro-3d-canvas" class="pro-3d-canvas" aria-hidden="true"></canvas>
 
   <!-- GTA Scroll Background Artwork Cross-Fader -->
   <div id="gta-scroll-bg" class="gta-scroll-bg-container" aria-hidden="true">
@@ -235,6 +306,16 @@
       </nav>
 
       <div class="nav-controls">
+        <!-- GTA HUD Status Display (Health, Armor, Cash, Time) -->
+        <div class="gta-hud-bar" id="gta-hud-bar" aria-label="Game HUD">
+          <div class="gta-hud-clock" id="gta-hud-clock">12:00 PM</div>
+          <div class="gta-hud-bars">
+            <div class="hud-stat hud-health" title="Health: 100%"><span class="hud-stat-fill" style="width: 100%"></span></div>
+            <div class="hud-stat hud-armor" title="Armor: 100%"><span class="hud-stat-fill" style="width: 100%"></span></div>
+          </div>
+          <div class="gta-hud-cash" id="gta-hud-cash" title="Respect Bounty">$001,337,420</div>
+        </div>
+
         <!-- GTA Vice City 6-Star Wanted Meter -->
         <div class="gta-wanted-meter" id="gta-wanted-hud" title="Reputation Level - Explore portfolio to gain stars!">
           <span class="wanted-label">REPUTATION</span>
@@ -258,6 +339,18 @@
             </span>
           </button>
         </div>
+
+        <!-- San Andreas Pause Menu Trigger Button -->
+        <button id="gta-pause-btn" class="gta-pause-trigger-btn" title="Open San Andreas Pause Menu (ESC)">
+          <span class="pause-icon">⏸</span>
+          <span class="pause-text">PAUSE</span>
+        </button>
+
+        <!-- Hybrid Mode Switch (Arcade vs Pro/Recruiter) -->
+        <button id="mode-toggle-btn" class="mode-toggle-btn" title="Switch between GTA Arcade and Pro/Recruiter Mode (Shift+P)" aria-label="Toggle Portfolio Mode">
+          <span class="mode-icon" id="mode-icon">🎮</span>
+          <span class="mode-label" id="mode-label">ARCADE</span>
+        </button>
 
         <button id="theme-toggle" class="theme-btn" aria-label="Toggle light and dark theme">
           <!-- Light Icon -->
@@ -468,7 +561,9 @@
             <button class="terminal-btn-cmd" data-cmd="about">about</button>
             <button class="terminal-btn-cmd" data-cmd="projects">projects</button>
             <button class="terminal-btn-cmd" data-cmd="skills">skills</button>
-            <button class="terminal-btn-cmd" data-cmd="football">football</button>
+            <button class="terminal-btn-cmd" data-cmd="git log">git log</button>
+            <button class="terminal-btn-cmd" data-cmd="cat resume">cat resume</button>
+            <button class="terminal-btn-cmd" data-cmd="sudo hire">sudo hire ⚡</button>
             <button class="terminal-btn-cmd" data-cmd="clear">clear</button>
           </div>
         </div>
@@ -488,10 +583,23 @@
               <div class="projects-grid">
                 <!-- Project 1: Crop Disease -->
                 <article class="project-card scroll-reveal" id="proj-card-crop">
-                  <div class="project-visual bg-grad-crop">
-                    <div class="leaf-heatmap-preview">
-                      <span class="heatmap-overlay-text">Grad-CAM Overlay Enabled</span>
-                      <div class="pulse-overlay-ring"></div>
+                  <div class="mission-dossier-header">
+                    <span class="dossier-badge">MISSION #01</span>
+                    <span class="dossier-status">CONFIDENTIAL // VERIFIED</span>
+                  </div>
+                  <div class="project-visual bg-grad-crop interactive-preview-crop">
+                    <div class="card-xai-slider-container" id="crop-card-interactive">
+                      <div class="xai-slider-layer layer-clean">
+                        <span class="xai-tag">Original Leaf</span>
+                        <div class="leaf-clean-art">🍃</div>
+                      </div>
+                      <div class="xai-slider-layer layer-heatmap" id="card-heatmap-layer">
+                        <span class="xai-tag">Grad-CAM (97.9%)</span>
+                        <div class="leaf-heatmap-art">🔥</div>
+                      </div>
+                      <input type="range" class="xai-slider-input" id="card-xai-slider" min="0" max="100" value="50" aria-label="Drag to reveal Grad-CAM attention heatmap">
+                      <div class="xai-slider-divider" id="card-xai-divider" style="left: 50%;"></div>
+                      <span class="xai-instruction">◀ Drag Slider to Inspect Heatmap ▶</span>
                     </div>
                   </div>
                   <div class="project-info">
@@ -503,18 +611,15 @@
                     <h3 class="project-name">Explainable Crop Disease Detection System</h3>
                     <p class="project-description">
                       Engineered hybrid deep learning Vision Transformer (ViT) paired with a ResNet-50 backbone,
-                      capturing
-                      long-range pathological symptoms with post-hoc explanation (Grad-CAM, LIME) and Bayesian
-                      Uncertainty
-                      Tier.
+                      capturing long-range pathological symptoms with post-hoc explanation (Grad-CAM, LIME) and Bayesian
+                      Uncertainty Tier.
                     </p>
                     <div class="project-stats-row">
                       <div class="p-stat"><strong>97.91%</strong> Validation Accuracy</div>
                       <div class="p-stat"><strong>0.99</strong> ROC-AUC Score</div>
                     </div>
                     <div class="project-links">
-                      <button class="btn btn-sm btn-outline btn-dialog-trigger" data-dialog="dialog-crop">Deep Dive &
-                        Demo</button>
+                      <button class="btn btn-sm btn-outline btn-dialog-trigger" data-dialog="dialog-crop">Deep Dive & Demo</button>
                       <a href="https://github.com/suryanshxharma/crop-disease-detection" target="_blank"
                         class="github-icon-link" aria-label="View source code on GitHub">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -531,14 +636,29 @@
 
                 <!-- Project 2: Stock Forecasting -->
                 <article class="project-card scroll-reveal" id="proj-card-stock">
-                  <div class="project-visual bg-grad-stock">
-                    <div class="stock-graph-preview">
-                      <svg viewBox="0 0 100 50" class="graph-svg-line">
-                        <path d="M 0 40 L 10 38 L 20 42 L 30 30 L 40 32 L 50 20 L 60 25 L 70 15 L 80 18 L 90 8 L 100 10"
-                          fill="none" stroke="var(--color-primary)" stroke-width="1.5"></path>
-                        <path d="M 0 40 L 10 37 L 20 40 L 30 31 L 40 33 L 50 18 L 60 23 L 70 14 L 80 20 L 90 7 L 100 8"
-                          fill="none" stroke="var(--color-secondary)" stroke-width="1.5" stroke-dasharray="2,2"></path>
+                  <div class="mission-dossier-header">
+                    <span class="dossier-badge">MISSION #02</span>
+                    <span class="dossier-status">CONFIDENTIAL // VERIFIED</span>
+                  </div>
+                  <div class="project-visual bg-grad-stock interactive-preview-stock">
+                    <div class="stock-mini-interactive" id="stock-mini-interactive">
+                      <div class="stock-live-metric-row">
+                        <span class="stock-ticker">NVDA // $138.45</span>
+                        <span class="stock-model-toggle" id="stock-model-label">MODEL: LSTM</span>
+                      </div>
+                      <svg viewBox="0 0 160 65" class="stock-interactive-svg" id="stock-interactive-svg">
+                        <!-- Actual Price Line -->
+                        <path id="stock-actual-path" d="M 0 52 L 20 48 L 40 50 L 60 38 L 80 42 L 100 24 L 120 30 L 140 18 L 160 12" fill="none" stroke="var(--color-primary)" stroke-width="2"></path>
+                        <!-- Predicted Model Line -->
+                        <path id="stock-pred-path" d="M 0 52 L 20 46 L 40 48 L 60 39 L 80 40 L 100 22 L 120 28 L 140 16 L 160 10" fill="none" stroke="#2ecc71" stroke-width="2" stroke-dasharray="3,3"></path>
+                        <!-- Dynamic Scrubber Hover Dot -->
+                        <circle id="stock-hover-dot" cx="100" cy="24" r="4" fill="#00f0ff" stroke="#fff" stroke-width="1.5"></circle>
                       </svg>
+                      <div class="stock-timeframe-selector">
+                        <button class="timeframe-btn active" data-model="lstm">LSTM (98.2%)</button>
+                        <button class="timeframe-btn" data-model="gru">GRU (97.8%)</button>
+                        <button class="timeframe-btn" data-model="baseline">ARIMA</button>
+                      </div>
                     </div>
                   </div>
                   <div class="project-info">
@@ -550,16 +670,14 @@
                     <h3 class="project-name">Stock Price Prediction</h3>
                     <p class="project-description">
                       Architected an end-to-end stock forecasting pipeline using TensorFlow, scikit-learn, and yfinance
-                      to
-                      compare sequential models (LSTM, GRU) against traditional baselines.
+                      to compare sequential models (LSTM, GRU) against traditional baselines.
                     </p>
                     <div class="project-stats-row">
                       <div class="p-stat"><strong>21</strong> Technical Indicators</div>
                       <div class="p-stat"><strong>Zero</strong> Forward Leakage</div>
                     </div>
                     <div class="project-links">
-                      <button class="btn btn-sm btn-outline btn-dialog-trigger" data-dialog="dialog-stock">Deep Dive &
-                        Demo</button>
+                      <button class="btn btn-sm btn-outline btn-dialog-trigger" data-dialog="dialog-stock">Deep Dive & Demo</button>
                       <a href="https://github.com/suryanshxharma/stock-prediction-pipeline" target="_blank"
                         class="github-icon-link" aria-label="View source code on GitHub">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -576,6 +694,10 @@
 
                 <!-- Project 3: Typewise AI Growth Agent -->
                 <article class="project-card scroll-reveal" id="proj-card-agent">
+                  <div class="mission-dossier-header">
+                    <span class="dossier-badge">MISSION #03</span>
+                    <span class="dossier-status">CONFIDENTIAL // VERIFIED</span>
+                  </div>
                   <div class="project-visual bg-grad-agent">
                     <div class="terminal-nodes-preview">
                       <div class="node active">Lead Crawler</div>
@@ -594,16 +716,14 @@
                     <h3 class="project-name">Typewise AI Growth Agent</h3>
                     <p class="project-description">
                       An autonomous B2B lead generation engine crawling social platforms (Reddit) to score intention,
-                      outline
-                      user pain points, and write custom sales copies.
+                      outline user pain points, and write custom sales copies.
                     </p>
                     <div class="project-stats-row">
                       <div class="p-stat"><strong>Multi-Agent</strong> Pipeline</div>
                       <div class="p-stat"><strong>Qual+Quant</strong> Lead Scoring</div>
                     </div>
                     <div class="project-links">
-                      <button class="btn btn-sm btn-outline btn-dialog-trigger" data-dialog="dialog-agent">Deep Dive &
-                        Demo</button>
+                      <button class="btn btn-sm btn-outline btn-dialog-trigger" data-dialog="dialog-agent">Deep Dive & Demo</button>
                       <a href="https://github.com/suryanshxharma/AI-Growth-Agent-for-B2B-SaaS" target="_blank"
                         class="github-icon-link" aria-label="View source code on GitHub">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -620,6 +740,10 @@
 
                 <!-- Project 4: BillFlow WA -->
                 <article class="project-card scroll-reveal" id="proj-card-billflow">
+                  <div class="mission-dossier-header">
+                    <span class="dossier-badge">MISSION #04</span>
+                    <span class="dossier-status">CONFIDENTIAL // VERIFIED</span>
+                  </div>
                   <div class="project-visual bg-grad-receipt">
                     <div class="billing-receipt-preview">
                       <div class="receipt-paper">
@@ -639,8 +763,7 @@
                     </div>
                     <h3 class="project-name">BillFlow WA: WhatsApp Billing SaaS</h3>
                     <p class="project-description">
-                      A receipt billing dashboard for SMBs sending dynamic receipts and UPI pay gates through
-                      redirection
+                      A receipt billing dashboard for SMBs sending dynamic receipts and UPI pay gates through redirection
                       hooks, saving 100% API expenses.
                     </p>
                     <div class="project-stats-row">
@@ -648,9 +771,7 @@
                       <div class="p-stat"><strong>Web Audio</strong> Chime Synths</div>
                     </div>
                     <div class="project-links">
-                      <button class="btn btn-sm btn-outline btn-dialog-trigger" data-dialog="dialog-billflow">Deep Dive
-                        &
-                        Demo</button>
+                      <button class="btn btn-sm btn-outline btn-dialog-trigger" data-dialog="dialog-billflow">Deep Dive & Demo</button>
                       <a href="https://github.com/suryanshxharma/BillFlow-WA" target="_blank" class="github-icon-link"
                         aria-label="View source code on GitHub">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -667,6 +788,10 @@
 
                 <!-- Project 5: Zen Study Timer -->
                 <article class="project-card scroll-reveal" id="proj-card-zen">
+                  <div class="mission-dossier-header">
+                    <span class="dossier-badge">MISSION #05</span>
+                    <span class="dossier-status">CONFIDENTIAL // VERIFIED</span>
+                  </div>
                   <div class="project-visual bg-grad-zen">
                     <div class="zen-timer-preview">
                       <div class="zen-timer-display" id="card-timer-display">25:00</div>
@@ -709,6 +834,10 @@
 
                 <!-- Project 6: ExamBro -->
                 <article class="project-card scroll-reveal" id="proj-card-exambro">
+                  <div class="mission-dossier-header">
+                    <span class="dossier-badge">MISSION #06</span>
+                    <span class="dossier-status">CONFIDENTIAL // VERIFIED</span>
+                  </div>
                   <div class="project-visual bg-grad-exambro">
                     <div class="exambro-preview">
                       <div class="exambro-badge">🎓 ExamBro AI Copilot</div>
