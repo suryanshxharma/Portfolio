@@ -3410,6 +3410,11 @@ html[data-theme="light"] .stat-number {
 /* ==========================================================================
    PRO / RECRUITER MINIMALIST MODE STYLING OVERRIDES (html[data-mode="pro"])
    ========================================================================== */
+/* In Pro Mode, loading screen is omitted so header must always be visible */
+html[data-mode="pro"] .header {
+  transform: translateY(0) !important;
+}
+
 html[data-mode="pro"] #gta-custom-cursor,
 html[data-mode="pro"] #gta-loading-screen,
 html[data-mode="pro"] #gta-hud-bar,
@@ -3475,15 +3480,21 @@ html[data-mode="pro"] .gta-section-badge {
 }
 
 html[data-mode="pro"] .mode-toggle-btn {
-  background: rgba(99, 102, 241, 0.15) !important;
-  border-color: #6366f1 !important;
-  color: #c7d2fe !important;
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.3) !important;
+  background: rgba(99, 102, 241, 0.25) !important;
+  border-color: #818cf8 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.4) !important;
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+  padding: 6px 14px;
 }
 
 html[data-mode="pro"] .mode-toggle-btn:hover {
   background: #6366f1 !important;
   color: #ffffff !important;
+  transform: scale(1.05);
 }
 
 @media (max-width: 1400px) {

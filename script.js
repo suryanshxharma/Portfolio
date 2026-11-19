@@ -1670,6 +1670,7 @@ function toggleHybridMode() {
 function setPortfolioMode(mode) {
   const modeIcon = document.getElementById('mode-icon');
   const modeLabel = document.getElementById('mode-label');
+  const mainHeader = document.getElementById('main-header');
 
   document.documentElement.setAttribute('data-mode', mode);
   localStorage.setItem('portfolio-mode', mode);
@@ -1677,6 +1678,7 @@ function setPortfolioMode(mode) {
   if (mode === 'pro') {
     if (modeIcon) modeIcon.textContent = '💼';
     if (modeLabel) modeLabel.textContent = 'PRO MODE';
+    if (mainHeader) mainHeader.classList.add('header-visible');
   } else {
     if (modeIcon) modeIcon.textContent = '🎮';
     if (modeLabel) modeLabel.textContent = 'ARCADE';
