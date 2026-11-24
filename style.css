@@ -589,6 +589,15 @@ html[data-theme="light"] .moon-icon { display: block; }
   text-wrap: balance;
 }
 
+.hero-handle {
+  font-size: 0.55em;
+  font-weight: 500;
+  color: var(--color-text-dim);
+  letter-spacing: 0;
+  vertical-align: middle;
+  opacity: 0.85;
+}
+
 .hero-subtitle {
   font-size: var(--font-size-lg);
   color: var(--color-text-dim);
