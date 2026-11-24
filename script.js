@@ -32,9 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initRadioWheelModal();
   initCheatCodes();
   initHybridModeSwitch();
+  initProAccentSwitcher();
+  initCopyEmailButton();
   initProjectCardMiniDemos();
   initPro3DWebGL();
   initPro3DCardTilt();
+  initRapSheetModal();
 });
 
 /* ==========================================================================
@@ -114,6 +117,7 @@ function initTerminal() {
       <p>  <span class="cmd-text">skills</span>       - Technical capabilities checklist</p>
       <p>  <span class="cmd-text">git log</span>      - View career & engineering commit history</p>
       <p>  <span class="cmd-text">cat resume</span>   - Display full resume dossier</p>
+      <p>  <span class="cmd-text">dossier</span>      - Export / print formatted GTA Mission Dossier</p>
       <p>  <span class="cmd-text">sudo hire</span>    - Request contract or interview discussion</p>
       <p>  <span class="cmd-text">wanted</span>       - Check current Vice City 6-Star Reputation level</p>
       <p>  <span class="cmd-text">football</span>     - Varsity football coordination & tactical vision</p>
@@ -144,7 +148,21 @@ function initTerminal() {
       <p><strong>Contact:</strong> suryanshxharma@gmail.com | <a href="https://linkedin.com/in/suryanshxharma" target="_blank" rel="noopener noreferrer" style="color: #00f0ff;">linkedin.com/in/suryanshxharma</a></p>
       <p class="text-dim">--------------------------------------------------</p>
       <p>📥 Direct PDF Download: <a href="Suryansh_Sharma_Resume.pdf" download="Suryansh_Sharma_Resume.pdf" target="_blank" rel="noopener noreferrer" style="color: #ff007f; font-weight: 700; text-decoration: underline;">[Download Suryansh_Sharma_Resume.pdf]</a></p>
+      <p>🚨 Police Rap Sheet: <button type="button" onclick="openRapSheetModal()" style="background: rgba(185,28,28,0.25); border: 1px solid #b91c1c; color: #ff4d4d; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-family: monospace;">open rapsheet</button></p>
     `,
+    dossier: () => {
+      openRapSheetModal();
+      return `
+        <p class="output-success">📂 [OPENING VCPD CLASSIFIED RAP SHEET & CRIMINAL RECORD] 📂</p>
+        <p class="text-dim">--------------------------------------------------</p>
+        <p>Subject: SURYANSH SHARMA // 6-Star Wanted Record loaded.</p>
+        <p>Review charges, evidence dossiers, and print official police rap sheet from the dossier console.</p>
+      `;
+    },
+    rapsheet: () => {
+      openRapSheetModal();
+      return `<p class="output-success">📂 VCPD Rap Sheet dossier opened on screen.</p>`;
+    },
     'sudo hire': () => {
       addCash(500000);
       addReputationStar();
@@ -1532,6 +1550,9 @@ function initSanAndreasPauseMenu() {
 
     if (action === 'resume') {
       closePauseMenu();
+    } else if (action === 'rapsheet') {
+      closePauseMenu();
+      openRapSheetModal();
     } else if (action === 'resume-pdf') {
       closePauseMenu();
       const a = document.createElement('a');
@@ -1730,12 +1751,77 @@ function setPortfolioMode(mode) {
     if (modeIcon) modeIcon.textContent = '💼';
     if (modeLabel) modeLabel.textContent = 'PRO MODE';
     if (mainHeader) mainHeader.classList.add('header-visible');
+    const accentPicker = document.getElementById('pro-accent-picker');
+    if (accentPicker) accentPicker.style.display = 'inline-flex';
   } else {
     if (modeIcon) modeIcon.textContent = '🎮';
     if (modeLabel) modeLabel.textContent = 'ARCADE';
+    const accentPicker = document.getElementById('pro-accent-picker');
+    if (accentPicker) accentPicker.style.display = 'none';
   }
   updatePro3DRunningState();
   playGTAMenuClickSound();
+}
+
+function initProAccentSwitcher() {
+  const dots = document.querySelectorAll('.accent-dot');
+  if (!dots.length) return;
+
+  const savedAccent = localStorage.getItem('pro-accent') || 'indigo';
+  document.documentElement.setAttribute('data-pro-accent', savedAccent);
+
+  dots.forEach(dot => {
+    if (dot.getAttribute('data-accent') === savedAccent) {
+      dot.classList.add('active');
+    } else {
+      dot.classList.remove('active');
+    }
+
+    dot.addEventListener('click', () => {
+      const accent = dot.getAttribute('data-accent');
+      document.documentElement.setAttribute('data-pro-accent', accent);
+      localStorage.setItem('pro-accent', accent);
+
+      dots.forEach(d => d.classList.remove('active'));
+      dot.classList.add('active');
+      playGTAMenuClickSound();
+    });
+  });
+}
+
+function initCopyEmailButton() {
+  const btn = document.getElementById('btn-copy-email');
+  if (!btn) return;
+
+  btn.addEventListener('click', async () => {
+    const email = 'suryanshxharma@gmail.com';
+    const tooltip = btn.querySelector('.copy-tooltip');
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(email);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = email;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+
+      btn.classList.add('copied');
+      if (tooltip) tooltip.textContent = 'Copied! ✓';
+      playGTALoadedChime();
+
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        if (tooltip) tooltip.textContent = 'Copy';
+      }, 2200);
+    } catch (err) {
+      if (tooltip) tooltip.textContent = 'Press Ctrl+C';
+    }
+  });
 }
 
 /* ==========================================================================
@@ -2143,5 +2229,65 @@ function checkShowWelcomeModal() {
     });
   }
 }
+
+/* ==========================================================================
+   GTA RAP SHEET & POLICE DOSSIER MODAL SYSTEM
+   ========================================================================== */
+function openRapSheetModal() {
+  const modal = document.getElementById('gta-rapsheet-modal');
+  if (!modal) return;
+  modal.style.display = 'flex';
+  modal.setAttribute('aria-hidden', 'false');
+  playGTASynthArp(250, 500);
+}
+
+function closeRapSheetModal() {
+  const modal = document.getElementById('gta-rapsheet-modal');
+  if (!modal) return;
+  modal.style.display = 'none';
+  modal.setAttribute('aria-hidden', 'true');
+  playGTAMenuClickSound();
+}
+
+window.openRapSheetModal = openRapSheetModal;
+window.closeRapSheetModal = closeRapSheetModal;
+
+function initRapSheetModal() {
+  const modal = document.getElementById('gta-rapsheet-modal');
+  const closeBtn = document.getElementById('rapsheet-close-btn');
+  const printBtn = document.getElementById('btn-print-rapsheet');
+  if (!modal) return;
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeRapSheetModal);
+  }
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeRapSheetModal();
+    }
+  });
+
+  if (printBtn) {
+    printBtn.addEventListener('click', () => {
+      document.body.classList.add('printing-rapsheet');
+      window.print();
+      setTimeout(() => {
+        document.body.classList.remove('printing-rapsheet');
+      }, 1000);
+    });
+  }
+
+  window.addEventListener('afterprint', () => {
+    document.body.classList.remove('printing-rapsheet');
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.style.display !== 'none') {
+      closeRapSheetModal();
+    }
+  });
+}
+
 
 
